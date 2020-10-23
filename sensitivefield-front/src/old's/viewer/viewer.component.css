@@ -1,0 +1,84 @@
+.page{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 85%;
+    background-color: #EBEDEC;
+    box-shadow: 10px 10px 2px 1px #4B576F;
+    scrollbar-color: transparent transparent;
+  scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.pagePop {
+  animation-name: hoverPop;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.pagePop1 {
+  animation-name: hoverPopV2;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.page::-webkit-scrollbar {
+    width: 0rem;
+}
+
+.page::-webkit-scrollbar-track {
+    background: gray;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+@keyframes hoverPop {
+  0%, 100% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(1.04);
+  }
+  66% {
+    transform: scale(0.95);
+  }
+}
+@keyframes hoverPopV2 {
+  0%, 100% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(1.04);
+  }
+  66% {
+    transform: scale(0.95);
+  }
+}
+.left{
+   position: absolute;
+   top: -5%;
+   left: -1%;
+   width: 40px;
+   height: 110%;
+   background: rgba(0,0,0,0.01);
+   color: aliceblue;
+   transition: 200ms;
+   opacity: 0;
+}
+.right{
+   position: absolute;
+   top: -5%;
+   right: -1%;
+   width: 40px;
+   height: 110%;
+   background: rgba(0,0,0,0.01);
+   transition: 200ms;
+   opacity: 0;
+
+}
+.right:hover,.left:hover{
+   cursor: pointer;
+   background: rgba(0,0,0,0.4);
+   opacity: 1;
+}
+

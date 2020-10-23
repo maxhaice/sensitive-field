@@ -1,0 +1,6 @@
+<div class="page" [ngClass]="bgClass">
+    <router-outlet></router-outlet>
+</div>
+<div class="left" (click)="toPrevious()"></div>
+<div class="right" (click)="toNext()"></div>
+<horizontal-navbar></horizontal-navbar>

@@ -1,0 +1,35 @@
+
+<div style="text-align: center; width: 23%; margin-right: auto; margin-left: auto;">
+    <strong style="margin-bottom: 20px;">Налаштування сповіщень</strong>
+
+    <section style="text-align: left;">
+      <span>
+      <mat-checkbox
+          [checked]="isSoundAll" [indeterminate]="someComplete()" (change)="setSoundAll($event.checked)">
+        отримувати сповіщення з усіх подій
+      </mat-checkbox>
+    </span><br>
+    <span >
+          <mat-checkbox style="margin-left: 30px;" [(ngModel)]="dangerSounds"
+                        (change)="updateAllComplete()"
+                        >
+            небезпечні
+          </mat-checkbox><br>
+          <mat-checkbox style="margin-left: 30px;" [(ngModel)]="shootSounds"
+                        (change)="updateAllComplete()"
+                        >
+            постріли
+          </mat-checkbox><br>
+          <mat-checkbox style="margin-left: 30px;" [(ngModel)]="carSounds"
+                        (change)="updateAllComplete()"
+                        >
+            транспорт
+          </mat-checkbox><br>
+          <mat-checkbox style="margin-left: 30px;" [(ngModel)]="anotherSounds"
+                        (change)="updateAllComplete()"
+                        >
+          інше
+          </mat-checkbox>
+    </span>
+    </section>
+</div>

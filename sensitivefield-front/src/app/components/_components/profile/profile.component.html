@@ -1,0 +1,27 @@
+<div>
+    <div style="width: 60%; margin-left: auto; margin-right: auto; text-align: center;" >
+    <strong>Налаштування профілю</strong><br><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Поточний пароль</mat-label>
+        <input [(ngModel)]="odlpass" matInput [type]="hide_1 ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hide_1 = !hide_1" [attr.aria-label]="'Сховати пароль'" [attr.aria-pressed]="hide_1">
+        <mat-icon>{{hide_1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Новий пароль</mat-label>
+        <input [(ngModel)]="pass_1" matInput [type]="hide_2 ? 'password' : 'text'" (change)='passwordChange()' required>
+        <button mat-icon-button matSuffix (click)="hide_2 = !hide_2" [attr.aria-label]="'Сховати пароль'" [attr.aria-pressed]="hide_2">
+        <mat-icon>{{hide_2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Повторіть новий пароль</mat-label>
+        <input [(ngModel)]="pass_2" matInput [type]="hide_3 ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hide_3 = !hide_3" [attr.aria-label]="'Сховати пароль'" [attr.aria-pressed]="hide_3">
+        <mat-icon>{{hide_3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    <button (click)="onSubmitChangePassword()" mat-stroked-button>Змінити</button>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="center">
+    <div class="title">
+       <strong>Статистика</strong>
+    </div>
+    <div class="container">
+        <!-- <div class="diagram">
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [chartType]="pieChartType"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins"
+                  [colors]="pieChartColors"
+                  [legend]="pieChartLegend">
+          </canvas>
+        </div>
+        <div class="options">
+          <label>Type chart:</label>
+          <select [(ngModel)]="chartType">
+            <option value="map">Map</option>
+            <option value="pie">Pie</option>
+          </select>
+          <label *ngIf="chartType">Chart meaning:</label>
+          <select *ngIf="chartType" [(ngModel)]="chartMeaning">
+            <option value="sensor">Sensors</option>
+            <option value="event">Events</option>
+          </select>
+          <label *ngIf="chartMeaning == 'event'">Event meaning:</label>
+          <select *ngIf="chartMeaning == 'event'" [(ngModel)]="chartEventMeaning">
+            <option value="transport">Transport</option>
+            <option value="s_b">Shoots & Booms</option>
+            <option value="other">other sounds</option>
+          </select>
+          <label *ngIf="chartMeaning == 'sensor'">Sensor meaning:</label>
+          <select *ngIf="chartMeaning == 'sensor'" [(ngModel)]="chartSensorMeaning">
+            <option value="dang">Dangerous zone</option>
+            <option value="norm">Normal zone</option>
+            <option value="empty">Empty zone</option>
+          </select>
+          <label *ngIf="( chartEventMeaning=='transport' && chartMeaning == 'event')">Meaning value:</label>
+          <select *ngIf="( chartEventMeaning=='transport' && chartMeaning == 'event')" [(ngModel)]="chartEventMeaningValue">
+            <option>Tank</option>
+            <option>Car</option>
+            <option>Motobyke</option>
+          </select>
+          <label *ngIf="( chartEventMeaning=='s_b' && chartMeaning == 'event')">Meaning value:</label>
+           <select *ngIf="( chartEventMeaning=='s_b' && chartMeaning == 'event')" [(ngModel)]="chartEventMeaningValue">
+            <option>Unrecognise</option>
+            <option>Sniper</option>
+            <option>Artellery</option>
+            <option>Granade</option>
+            <option>Pistol</option>
+            <option>Automat</option>
+            <option>Big boom</option>
+          </select>
+          <label *ngIf="( chartEventMeaning=='other' && chartMeaning == 'event')">Meaning value:</label>
+          <select *ngIf="( chartEventMeaning=='other' && chartMeaning == 'event')" [(ngModel)]="chartEventMeaningValue">
+            <option>Animal</option>
+            <option>Human</option>
+            <option>Nature</option>
+          </select>
+        </div>
+        <div class="">
+
+        </div> -->
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <p>Фільтри</p>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <filter-stat></filter-stat>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div class="toogle">
+          <mat-button-toggle-group name="statType" aria-label="Font Style">
+          <mat-button-toggle value="grafics">Графіки</mat-button-toggle>
+          <mat-button-toggle value="map">Карти</mat-button-toggle>
+          <mat-button-toggle value="table">Таблиці</mat-button-toggle>
+        </mat-button-toggle-group>
+        </div>
+        <mat-card>
+          <div class="diagram">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [colors]="pieChartColors"
+                    [legend]="pieChartLegend">
+            </canvas>
+          </div>
+        </mat-card>
+    </div>
+</div>

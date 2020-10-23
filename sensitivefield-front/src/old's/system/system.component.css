@@ -1,0 +1,81 @@
+h3{
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+    position: absolute;
+    top: 48%;
+    /* right: 20%; */
+}
+img{
+    float:right;
+    width: 30%;
+    height: 30%;
+    padding-right: 10px;
+}
+.table-fill {
+    font-family: 'Exo 2', sans-serif;
+    position: absolute;
+    bottom: 0%;
+    /* border-radius:3px; */
+    /* border-collapse: collapse; */
+    height: auto;
+    margin: auto;
+    padding:5px;
+    width: 100%;
+    height: 100%;
+    animation: float 5s infinite;
+}
+th {
+    color:black;
+    background: #CBC3C0;
+    border-bottom:1px solid gray;
+    border-top:1px solid gray;
+    font-size:18px;
+    font-weight: 100;
+    padding:0px;
+    text-align:center;
+    vertical-align:middle;
+    height: 20%;
+    transition:  250ms;
+
+}
+tr {
+    height: 20%;
+    color:black;
+    font-size:16px;
+    font-weight:normal;
+    transition:  600ms;
+}
+td {
+    height: 20%;
+    width: 12%;
+    background: #CBC3C0;
+    text-align:center;
+    vertical-align:middle;
+    font-weight:300;
+    font-size:18px;
+    transition: 250ms;
+}
+tr:hover > td{
+    background: #EBEDEC;
+}
+tr:hover > th{
+    background: #EBEDEC;
+}
+.cellC{
+    border: 0.5px solid gray;
+}
+.cellR{
+    border-bottom:1px solid gray;
+    border-left:1px solid gray;
+}
+.headL{
+    color: black;
+    font-size: 46px;
+    width: 12%;
+}
+.progress{
+    padding: 0%;
+    background: rgba(176, 0, 0, 0.345);
+    width: 100%;
+    height: 100%;
+}

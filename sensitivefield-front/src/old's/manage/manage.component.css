@@ -1,0 +1,85 @@
+.body {
+    margin: 0;
+    padding: 0;
+  }
+.page{
+    position: absolute;
+    top: 7%;
+    left: 10%;
+    width: 80%;
+    height: 86%;
+    text-align: center;
+    background-color: rgb(42, 42, 42);
+    box-shadow: 12px 12px 2px 1px rgb(140, 0, 255);
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: gray;
+}
+.pagePop {
+  animation-name: hoverPop;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.pagePop1 {
+  animation-name: hoverPopV2;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.page::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+.page::-webkit-scrollbar-track {
+    background: gray;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background: rgb(42, 42, 42);
+}
+.menu{
+  position: absolute;
+  top: 14%;
+  left:80%;
+  width: 16%;
+  height: 70%;
+  text-align: center;
+  background-color: transparent;
+  overflow: hidden;
+}
+.menu div{
+  opacity: 0.0;
+  transition: 0.3s;
+}
+.menu:hover div{
+  opacity: 1.0;
+}
+.menu:hover{
+  visibility: visible;
+  background-color: rgb(42, 42, 42);
+  animation-name: hoverPop;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  box-shadow: -12px -12px 2px 1px rgb(140, 0, 255);
+}
+@keyframes hoverPop {
+  0%, 100% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(1.04);
+  }
+  66% {
+    transform: scale(0.95);
+  }
+}
+@keyframes hoverPopV2 {
+  0%, 100% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(1.04);
+  }
+  66% {
+    transform: scale(0.95);
+  }
+}

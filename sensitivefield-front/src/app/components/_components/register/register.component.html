@@ -1,0 +1,30 @@
+<div>
+    <div style="width: 60%; margin-left: auto; margin-right: auto; text-align: center;" >
+      <strong>Створити користувача</strong>
+      <mat-form-field style="margin-top: 20px;"  appearance="fill">
+        <mat-label>Нікнейм користувача</mat-label>
+        <input [(ngModel)]="signupInfo.username" matInput #input required>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Ім'я користувача</mat-label>
+        <input [(ngModel)]="signupInfo.name" matInput #input required>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Пароль користувача</mat-label>
+        <input [(ngModel)]="signupInfo.password" matInput #input required>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Роль</mat-label>
+        <mat-select [(ngModel)]="role" required>
+          <mat-option value="admin" *ngIf="authority=='ROLE_SUPERUSER'">Адмін</mat-option>
+          <mat-option value="extendeduser">Пріоритетний користувач</mat-option>
+          <mat-option value="user">Користувач</mat-option>
+        </mat-select>
+        <mat-hint align="end">визначає права користувачеві</mat-hint>
+      </mat-form-field>
+    <button (click)="onSubmit()" mat-stroked-button>Створити</button>
+    </div>
+</div>

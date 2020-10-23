@@ -1,0 +1,12 @@
+<table  class="table-fill">
+    <tr>
+        <th class="cellL">Time</th>
+        <th class="cellC">Place</th>
+        <th class="cellR">Information</th>
+    </tr>
+    <tr *ngFor="let log of logs">
+      <td class="cellL">{{log.date + ' ' + log.time}}</td>
+      <td class="cellC">{{log.name}}</td>
+      <td  class="cellR">{{log.value}}</td>
+    </tr>
+</table>

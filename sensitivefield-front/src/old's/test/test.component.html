@@ -1,0 +1,10 @@
+
+  <table class="table border">
+    <tbody>
+		<tr *ngFor="let row of groups; let i = index">
+			<td> {{row.name}} </td>
+			<td> {{row.items}} </td>
+			<td> <button (click)="addItem(i)">Add</button> </td>
+   </tr>
+    </tbody>
+</table>

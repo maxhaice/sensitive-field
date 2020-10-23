@@ -1,0 +1,26 @@
+
+<!--<h1><strong style="color: rebeccapurple; font-family: 'Exo 2', sans-serif;display:block; text-align: center;">Hub News</strong></h1>-->
+<div style="position: relative">
+<!--  <div *ngFor="let n of news;" style="margin: 40px;">-->
+<!--      <h3 style="text-align: left;">{{n.date}}</h3>-->
+<!--      <p style="text-align: center;">{{n.title}}</p>-->
+<!--      <a href="{{n.url}}" style="text-align: right;"><h3> Read more... </h3></a>-->
+
+<!--  </div>-->
+<!--  &lt;!&ndash; TODO:Hey bro! we need change it's. see? fucking sheet, 'cause not have any content only title - it's so bad bro!!! &ndash;&gt;-->
+<!--  <div style="margin: 40px;">-->
+<!--      <h3 style="text-align: left;">20-9-20</h3>-->
+<!--      <p style="text-align: center;"> <strong>Lorem ipsum dolor sit amet</strong>.<br> Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt vitae semper quis lectus nulla at volutpat diam ut. Morbi non arcu risus quis varius. Egestas maecenas pharetra convallis posuere morbi leo urna. Nisi lacus sed viverra tellus in. Purus sit amet volutpat consequat mauris nunc. Erat pellentesque adipiscing commodo elit at. Nisl rhoncus mattis rhoncus urna neque viverra. Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Eu augue ut lectus arcu bibendum at varius. Iaculis nunc sed augue lacus viverra vitae congue. Morbi leo urna molestie at elementum eu facilisis sed. Nullam ac tortor vitae purus. Odio ut enim blandit volutpat maecenas. Mattis aliquam faucibus purus in massa tempor nec feugiat. Nisi lacus sed viverra tellus in hac. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Egestas purus viverra accumsan in nisl nisi scelerisque eu. At risus viverra adipiscing at in. Odio pellentesque diam volutpat commodo sed egestas. Ut lectus arcu bibendum at varius. Tristique nulla aliquet enim tortor at auctor. Etiam non quam lacus suspendisse faucibus interdum posuere lorem...</p>-->
+<!--      <a href="#" style="text-align: right;"><h3> Read more... </h3></a>-->
+<!--  </div>-->
+  <h3>Загрузить расписание</h3>
+  <div class="form-group">
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
+    <label class="loader-input" for="file">Выбрать файл</label>
+    <br>
+    <h3>{{status}}</h3>
+
+  </div>
+</div>

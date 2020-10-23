@@ -1,0 +1,38 @@
+<div class="center">
+    <div class="navig" style="text-align: center">
+            <div class="title">
+                <strong>Sensors</strong>
+            </div>
+      <br><br>
+      <br><br>
+            <label> Only is online</label>
+           <input (change)="onlyOnline()" [(ngModel)]="online" type="checkbox"><br>
+<!--           <label> In zone</label>-->
+<!--           <input type="text"><button>Select on the map</button>-->
+<!--           <google-chart style="width: 20%; height: 20%;" [data]="geoChart"></google-chart>-->
+
+    </div>
+    <br>
+    <div class="container">
+        <table class="table-fill">
+            <tr>
+              <th>id sensor</th>
+              <th>type</th>
+              <th>lon</th>
+              <th>lat</th>
+            </tr>
+            <tr *ngFor="let sensor of sensors">
+              <td><strong>{{sensor.id}}</strong>
+              </td>
+              <td><strong>{{sensor.state}}</strong>
+              </td>
+              <td><strong>{{sensor.latitude}}</strong>
+              </td>
+              <td><strong>{{sensor.longitude}}</strong>
+              </td>
+            </tr>
+          </table>
+
+
+    </div>
+    </div>

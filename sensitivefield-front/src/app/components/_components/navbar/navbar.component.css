@@ -1,0 +1,103 @@
+:host{
+  transition: 200ms;
+}
+.left{
+  grid-area: navbar;
+  transition: 200ms;
+  width: 100%; height: 100%;
+}
+.navbar {
+  width: 100%;
+  height: 100%;
+}
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.nav-item {
+  width: 100%;
+  height: 10%;
+  box-shadow: 0px 0px 10px var(--text-color);
+  margin-bottom: 2%;
+}
+.disabled{
+  pointer-events: none;
+  opacity: 0.6;
+}
+.disabled:hover{
+  color: var(--text-color);
+}
+.nav-item:last-child {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+a:link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: 800ms;
+  font-size: 26px;
+}
+.is-active{
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.is-active > .svg-icon path, .svg-icon polygon, .svg-icon rect, .svg-icon circle {
+  fill:var(--primary-color);
+} 
+
+.nav-link:hover{
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+.is-active:hover{
+  background: var(--secondary-color);
+}
+.nav-link:hover .svg-icon path,
+.svg-icon polygon,
+.svg-icon rect, .svg-icon circle {
+  fill:var(--primary-color);
+} 
+
+ .nav-link svg {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+.svg-icon {
+  width: 4em;
+  height: 4em;
+}
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: var(--text-color);
+  transition: 800ms;
+}
+.svg-icon circle {
+  stroke: var(--text-color);
+  stroke-width: 1;
+  transition: 800ms;
+}
+.hide-navbar{
+  display: none;
+}
+@media (max-width: 1111px) {
+  p{
+    display: none;
+  }
+}
+

@@ -1,0 +1,39 @@
+
+.table-fill {
+    font-family: 'Exo 2', sans-serif;
+    /*font-size: 86%;*/
+    bottom: 0;
+    border-radius:3px;
+    border-collapse: collapse;
+    height: 100%;
+    margin: auto;
+    padding: 5px;
+    width: 100%;
+    animation: float 5s infinite;
+    background: grey;
+}
+th {
+    color:black;
+    background: #CBC3C0;
+    border-bottom:1px solid gray;
+    border-top:1px solid gray;
+    padding:0;
+    text-align:center;
+    vertical-align:middle;
+    height: 10%;
+    transition:  250ms;
+}
+tr {
+    height: 20%;
+    color:black;
+    transition:  600ms;
+}
+td {
+    height: 20%;
+    width: 12%;
+    background: #CBC3C0;
+    padding:20px;
+    text-align:center;
+    vertical-align:middle;
+    transition: 250ms;
+}

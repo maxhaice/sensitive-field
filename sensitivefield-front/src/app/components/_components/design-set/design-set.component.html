@@ -1,0 +1,26 @@
+<div>
+  <div style="width: 60%; margin-left: auto; margin-right: auto; text-align: center;" >
+    <strong>Налаштування дизайну</strong><br><br>
+    <span>
+      <mat-checkbox
+      (change)="setHideNavbar()" [(ngModel)]="isHideNavbar">
+        Лише іконки лівої панелі навігації
+      </mat-checkbox>
+    </span>
+    <br><br>
+    <strong>Налаштування кольорів</strong><br><br>
+    <div style="text-align: center; width: 40%; margin-right: auto; margin-left: auto;">
+      <mat-label>Колір фону</mat-label><br>
+      <input type="color"  (change)="setBackground()" [(ngModel)]="background">
+    <br>
+      <mat-label>Колір вставок</mat-label><br>
+    <input type="color" (change)="setSecondaryBackground()" [(ngModel)]="s_background">
+    <br>
+    <mat-label>Колір тексту</mat-label><br>
+    <input type="color" (change)="setTextColor()" [(ngModel)]="textColor">
+  <br>
+    <mat-label>Колір тексту вставок</mat-label><br>
+    <input type="color" (change)="setSecondaryTextColor()" [(ngModel)]="s_textColor">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div>
+  <table  class="table-fill">
+    <tbody class="table-hover">
+    <tr>
+      <th>Name</th>
+      <th>LastName</th>
+      <th>Status</th>
+    </tr>
+    <tr *ngFor="let person of personWithStatus;">
+      <td> {{person.person.name}} </td>
+      <td>{{person.person.lastName}}</td>
+      <td><span class="dot" (click)="changeStatus(person)" [ngStyle]="{'background-color': !person.status ? 'red' : 'green' }"></span></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
