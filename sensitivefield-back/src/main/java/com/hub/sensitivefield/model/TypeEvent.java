@@ -9,14 +9,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(name = "event_type")
 public class TypeEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_typeevent")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "name_typeevent")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "typeEvent")

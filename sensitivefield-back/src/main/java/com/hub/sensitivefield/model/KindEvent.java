@@ -9,19 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "event_kind")
 @Getter
 @Setter
 public class KindEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_kindevent")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "priority_kindevent")
+    @Column(name = "priority")
     private String priority;
 
-    @Column(name = "name_kindevent")
+    @Column(name = "name")
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)

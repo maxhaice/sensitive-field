@@ -35,16 +35,16 @@ public class AudioSensor {
     }
 
     @Id
-    @Column(name = "id_audiosensor")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "latitude_audiosensor")
+    @Column(name = "latitude")
     private double latitude;
 
-    @Column(name = "longitude_audiosensor")
+    @Column(name = "longitude")
     private double longitude;
 
-    @Column(name = "name_audiosensor")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "audioSensor")
