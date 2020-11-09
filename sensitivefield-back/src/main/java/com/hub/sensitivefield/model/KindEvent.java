@@ -24,7 +24,7 @@ public class KindEvent {
     @Column(name = "name_kindevent")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "typevent_id")
     private TypeEvent typeEvent;
 

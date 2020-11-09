@@ -47,7 +47,7 @@ public class AudioSensor {
     @Column(name = "name_audiosensor")
     private String name;
 
-    @OneToMany(mappedBy = "audioSensor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "audioSensor")
     private List<AudioEvent> audioEvents;
 
 
