@@ -19,29 +19,29 @@ import java.util.Set;
 @EqualsAndHashCode
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "login_user"
+                "login"
         })
 })
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "id")
     private int id;
 
     @NotBlank
     @Size(min = 3, max = 50)
-    @Column(name = "name_user")
+    @Column(name = "name")
     private String name;
 
     @NotBlank
     @Size(min = 3, max = 50)
-    @Column(name = "login_user")
+    @Column(name = "login")
     private String login;
 
     @NotBlank
     @Size(min = 6, max = 100)
-    @Column(name = "password_user")
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -18,48 +18,48 @@ public class AudioEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_audioevent")
+    @Column(name = "id")
     private int id;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "audiosensor_id", nullable = false)
+    @JoinColumn(name = "audio_sensor_id", nullable = false)
     private AudioSensor audioSensor;
 
-    @Column(name = "latitude_audioevent")
+    @Column(name = "latitude")
     private double latitude;
 
-    @Column(name = "longitude_audioevent")
+    @Column(name = "longitude")
     private double longitude;
 
-    @Column(name = "dateserver_audioevent")
+    @Column(name = "date_of_come")
     private LocalDateTime dateServer;
 
-    @Column(name = "datereal_audioevent")
+    @Column(name = "date_origin")
     private LocalDateTime dateReal;
 
-    @Column(name = "typeSource_audioEvent1")
+    @Column(name = "source_type1")
     private String typeSource1;
 
-    @Column(name = "persistenceSource_audioEvent1")
+    @Column(name = "source_persistence1")
     private double persistenceSource1;
 
-    @Column(name = "typeSource_audioEvent2")
+    @Column(name = "source_type2")
     private String typeSource2;
 
-    @Column(name = "persistenceSource_audioEvent2")
+    @Column(name = "source_persistence2")
     private double persistenceSource2;
 
-    @Column(name = "typeSource_audioEvent3")
+    @Column(name = "source_type3")
     private String typeSource3;
 
-    @Column(name = "persistenceSource_audioEvent3")
+    @Column(name = "source_persistence3")
     private double persistenceSource3;
 
-    @Column(name = "isdeleted_audioevent")
+    @Column(name = "is_deleted")
     private boolean isDeleted = false;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "kindevent_id", nullable = false)
+    @JoinColumn(name = "event_kind_id", nullable = false)
     private KindEvent kindEvent;
 
     public AudioEvent(AudioSensor audioSensor, double latitude, double longitude, LocalDateTime dateServer, LocalDateTime dateReal, String typeSource1,
