@@ -23,6 +23,6 @@ public class Role {
     @Column(length = 60)
     private RoleName name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     List<User> users;
 }
