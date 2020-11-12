@@ -6,15 +6,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.time.LocalDateTime;
 
 public class newAudioEventDTO {
+    JsonNode sensor_coordinates;
+    JsonNode source;
     private int sensor_id;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date_real;
-
-    JsonNode sensor_coordinates;
-
-
-    JsonNode source;
 
     public int getSensor_id() {
         return sensor_id;

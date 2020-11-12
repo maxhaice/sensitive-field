@@ -14,6 +14,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Role {
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<User> users;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +24,4 @@ public class Role {
     @NaturalId
     @Column(length = 60)
     private RoleName name;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    List<User> users;
 }

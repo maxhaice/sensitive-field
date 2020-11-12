@@ -21,6 +21,18 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AudioSensor {
 
+    @Id
+    @Column(name = "id")
+    private int id;
+    @Column(name = "latitude")
+    private double latitude;
+    @Column(name = "longitude")
+    private double longitude;
+    @Column(name = "name")
+    private String name;
+    @OneToMany(mappedBy = "audioSensor")
+    private List<AudioEvent> audioEvents;
+
     public AudioSensor(ID id, Latitude latitude, Longitude longitude) {
         this.id = id.getValue();
         this.latitude = latitude.getValue();
@@ -36,23 +48,6 @@ public class AudioSensor {
         this.audioEvents = new ArrayList<>();
         this.name = name;
     }
-
-    @Id
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "latitude")
-    private double latitude;
-
-    @Column(name = "longitude")
-    private double longitude;
-
-    @Column(name = "name")
-    private String name;
-
-    @OneToMany(mappedBy = "audioSensor")
-    private List<AudioEvent> audioEvents;
-
 
     public void addAudioEvent(AudioEvent audioEvent) {
         List<AudioEvent> audioEvents = getAudioEvents();

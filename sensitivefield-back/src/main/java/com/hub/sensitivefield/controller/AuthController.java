@@ -34,22 +34,17 @@ import java.util.Set;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
     UserService userService;
-
     @Autowired
     RoleService roleService;
-
     @Autowired
     PasswordEncoder encoder;
-
     @Autowired
     JwtProvider jwtProvider;
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {

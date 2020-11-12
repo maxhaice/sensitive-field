@@ -39,6 +39,43 @@ public class AudioEventService {
     @Autowired
     private KindEventService kindEventService;
 
+    public static AudioEventDTO convertToDTO(AudioEvent audioEvent) {
+        return new AudioEventDTO(
+                audioEvent.getId(),
+                audioEvent.getAudioSensor().getId(),
+                audioEvent.getAudioSensor().getLatitude(),
+                audioEvent.getAudioSensor().getLongitude(),
+                audioEvent.getLatitude(),
+                audioEvent.getLongitude(),
+                audioEvent.getDateServer(),
+                audioEvent.getDateReal(),
+                audioEvent.getTypeSource1(),
+                audioEvent.getPersistenceSource1(),
+                audioEvent.getTypeSource2(),
+                audioEvent.getPersistenceSource2(),
+                audioEvent.getTypeSource3(),
+                audioEvent.getPersistenceSource3(),
+                audioEvent.isDeleted(),
+                audioEvent.getKindEvent()
+        );
+    }
+
+    public static AudioEventDTOwithoutSensor convertToDTOWithoutEvents(AudioEvent audioEvent) {
+        return new AudioEventDTOwithoutSensor(
+                audioEvent.getId(),
+                audioEvent.getDateServer(),
+                audioEvent.getDateReal(),
+                audioEvent.getTypeSource1(),
+                audioEvent.getPersistenceSource1(),
+                audioEvent.getTypeSource2(),
+                audioEvent.getPersistenceSource2(),
+                audioEvent.getTypeSource3(),
+                audioEvent.getPersistenceSource3(),
+                audioEvent.isDeleted(),
+                audioEvent.getKindEvent()
+        );
+    }
+
     public Optional<AudioEvent> getAudioEventById(int id) {
         return audioEventRepository.findById(id);
     }
@@ -167,42 +204,5 @@ public class AudioEventService {
             }
         }
         return kindEvent;
-    }
-
-    public static AudioEventDTO convertToDTO(AudioEvent audioEvent) {
-        return new AudioEventDTO(
-                audioEvent.getId(),
-                audioEvent.getAudioSensor().getId(),
-                audioEvent.getAudioSensor().getLatitude(),
-                audioEvent.getAudioSensor().getLongitude(),
-                audioEvent.getLatitude(),
-                audioEvent.getLongitude(),
-                audioEvent.getDateServer(),
-                audioEvent.getDateReal(),
-                audioEvent.getTypeSource1(),
-                audioEvent.getPersistenceSource1(),
-                audioEvent.getTypeSource2(),
-                audioEvent.getPersistenceSource2(),
-                audioEvent.getTypeSource3(),
-                audioEvent.getPersistenceSource3(),
-                audioEvent.isDeleted(),
-                audioEvent.getKindEvent()
-        );
-    }
-
-    public static AudioEventDTOwithoutSensor convertToDTOWithoutEvents(AudioEvent audioEvent) {
-        return new AudioEventDTOwithoutSensor(
-                audioEvent.getId(),
-                audioEvent.getDateServer(),
-                audioEvent.getDateReal(),
-                audioEvent.getTypeSource1(),
-                audioEvent.getPersistenceSource1(),
-                audioEvent.getTypeSource2(),
-                audioEvent.getPersistenceSource2(),
-                audioEvent.getTypeSource3(),
-                audioEvent.getPersistenceSource3(),
-                audioEvent.isDeleted(),
-                audioEvent.getKindEvent()
-        );
     }
 }

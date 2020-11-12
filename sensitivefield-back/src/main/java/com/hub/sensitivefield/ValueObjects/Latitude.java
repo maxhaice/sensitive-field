@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class Latitude {
 
-    private static Logger logger = LoggerFactory.getLogger(Latitude.class);
+    private static final Logger logger = LoggerFactory.getLogger(Latitude.class);
+    private final double value;
 
     public Latitude(double value) {
         if (!Latitude.isValid(value)) {
@@ -16,13 +17,11 @@ public class Latitude {
         this.value = value;
     }
 
-    private double value;
+    protected static boolean isValid(double value) {
+        return String.valueOf(value).split("\\.")[1].length() <= 10;
+    }
 
     public double getValue() {
         return value;
-    }
-
-    protected static boolean isValid(double value) {
-        return String.valueOf(value).split("\\.")[1].length() <= 10;
     }
 }
