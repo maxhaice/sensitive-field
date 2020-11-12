@@ -2,7 +2,6 @@ package com.hub.sensitivefield.service;
 
 
 import com.hub.sensitivefield.DTO.AudioEventDTO;
-import com.hub.sensitivefield.DTO.AudioSensorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;

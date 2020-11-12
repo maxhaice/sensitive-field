@@ -1,7 +1,6 @@
 package com.hub.sensitivefield.repository;
 
 import com.hub.sensitivefield.model.KindEvent;
-import com.hub.sensitivefield.model.PriorityEvent;
 import com.hub.sensitivefield.model.TypeEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

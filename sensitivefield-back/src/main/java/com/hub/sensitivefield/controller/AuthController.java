@@ -1,11 +1,5 @@
 package com.hub.sensitivefield.controller;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.Valid;
-
 import com.hub.sensitivefield.jwt.JwtProvider;
 import com.hub.sensitivefield.messages.JwtResponse;
 import com.hub.sensitivefield.messages.LoginForm;
@@ -29,6 +23,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+
+import javax.validation.Valid;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

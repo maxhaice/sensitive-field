@@ -1,7 +1,6 @@
 package com.hub.sensitivefield.service;
 
 import com.hub.sensitivefield.DTO.UserDTO;
-import com.hub.sensitivefield.DTO.newDTO.newUserDTO;
 import com.hub.sensitivefield.model.User;
 import com.hub.sensitivefield.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
