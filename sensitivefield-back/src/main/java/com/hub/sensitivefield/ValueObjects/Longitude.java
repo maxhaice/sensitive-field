@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class Longitude {
 
-    private static Logger logger = LoggerFactory.getLogger(Longitude.class);
+    private static final Logger logger = LoggerFactory.getLogger(Longitude.class);
+    private double value;
 
     private Longitude() {
     }
@@ -18,8 +19,6 @@ public class Longitude {
 
         this.value = value;
     }
-
-    private double value;
 
     public double getValue() {
         return value;

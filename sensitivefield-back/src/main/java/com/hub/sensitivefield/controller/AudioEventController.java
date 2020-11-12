@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 public class AudioEventController {
 
-    private static Logger logger = LoggerFactory.getLogger(AudioEventController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AudioEventController.class);
 
     @Autowired
     AudioEventService audioEventService;
