@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/api/users/login/{login}")
-    private ResponseEntity<UserDTO> getUserByLogin(@PathVariable String login){
+    private ResponseEntity<UserDTO> getUserByLogin(@PathVariable String login) {
         Optional<User> optionalUser = userService.getUserByLogin(login);
         if (optionalUser.isEmpty()) {
             logger.info("User with login=" + login + " WASN'T FOUND");

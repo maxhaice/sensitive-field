@@ -46,11 +46,10 @@ public class AudioSensorController {
 
     @PostMapping("/")
     private ResponseEntity<Void> addAudioSensor(@RequestBody newAudioSensorDTO newAudioSensorDTO) {
-        try{
+        try {
             audioSensorService.saveAudioSensor(newAudioSensorDTO);
             logger.info("AudioSensor WAS EDIT");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             logger.info("Something data from AudioSensor EDIT WAS WRONG");
         }
         return ResponseEntity.ok().build();
@@ -62,19 +61,18 @@ public class AudioSensorController {
             logger.info("Audio WAS EDIT");
             return ResponseEntity.ok().build();
         } else {
-            logger.info("Audio Sensor with id="+id+" WASN'T FOUND");
+            logger.info("Audio Sensor with id=" + id + " WASN'T FOUND");
             return ResponseEntity.noContent().build();
         }
     }
 
     @PutMapping("/{id}/name/{name}")
-    private ResponseEntity<?> changeAudioSensorName(@PathVariable String name, @PathVariable int id){
-        if(audioSensorService.changeAudioSensorName(id,name)){
-            logger.info("Audio Sensor name with id="+id+" WAS CHANGED");
+    private ResponseEntity<?> changeAudioSensorName(@PathVariable String name, @PathVariable int id) {
+        if (audioSensorService.changeAudioSensorName(id, name)) {
+            logger.info("Audio Sensor name with id=" + id + " WAS CHANGED");
             return ResponseEntity.ok().build();
-        }
-        else{
-            logger.info("Audio Sensor with id="+id+" WASN'T FOUND");
+        } else {
+            logger.info("Audio Sensor with id=" + id + " WASN'T FOUND");
             return ResponseEntity.noContent().build();
         }
     }
@@ -85,7 +83,7 @@ public class AudioSensorController {
             logger.info("Audio Sensor with id=" + id + " was DELETED");
             return ResponseEntity.ok().build();
         } else {
-            logger.info("Audio Sensor with id="+id+" WASN'T FOUND");
+            logger.info("Audio Sensor with id=" + id + " WASN'T FOUND");
             return ResponseEntity.noContent().build();
         }
     }

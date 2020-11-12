@@ -32,12 +32,12 @@ public class AudioSensorService {
                 ).collect(Collectors.toList());
     }
 
-    public List<AudioSensor> getAllAudioSensorEntity(){
+    public List<AudioSensor> getAllAudioSensorEntity() {
         return audioSensorRepository.findAll();
     }
 
 
-    public AudioSensor getByName(String name){
+    public AudioSensor getByName(String name) {
         return audioSensorRepository.getByName(name);
     }
 
@@ -79,9 +79,9 @@ public class AudioSensorService {
                 audioSensor.getLatitude(),
                 audioSensor.getLongitude(),
                 audioSensor.getAudioEvents()
-                                                .stream()
-                                                .map(AudioEventService::convertToDTOWithoutEvents)
-                                                .collect(Collectors.toList()));
+                        .stream()
+                        .map(AudioEventService::convertToDTOWithoutEvents)
+                        .collect(Collectors.toList()));
     }
 
     public AudioSensor convertFromDTO(newAudioSensorDTO newAudioSensorDTO) {
@@ -93,7 +93,7 @@ public class AudioSensorService {
 
     public boolean changeAudioSensorName(int id, String name) {
         Optional<AudioSensor> audioSensorOptional = audioSensorRepository.findById(id);
-        if(audioSensorOptional.isEmpty()){
+        if (audioSensorOptional.isEmpty()) {
             return false;
         }
 

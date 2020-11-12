@@ -48,7 +48,7 @@ public class UserService {
         } else {
             User user = userOptional.get();
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            if(!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())){
+            if (!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())) {
                 System.out.println("matches false");
                 return false;
             }
@@ -66,7 +66,7 @@ public class UserService {
         } else {
             User user = userOptional.get();
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            if(!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())){
+            if (!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())) {
                 System.out.println("matches false");
                 System.out.println("\"" + oldpassword + "\"");
                 System.out.println("\"" + user.getPassword() + "\"");

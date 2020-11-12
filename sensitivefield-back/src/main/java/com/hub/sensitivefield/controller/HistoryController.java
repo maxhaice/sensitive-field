@@ -75,18 +75,17 @@ public class HistoryController {
                 }
             }
 
-            if (readyToAddToSensor.stream().count()!=0) {
+            if (readyToAddToSensor.stream().count() != 0) {
                 audioSensorDTOwithEvents.setAudioEventDTOList(readyToAddToSensor);
                 readyToSendDTOs.add(audioSensorDTOwithEvents);
             }
         }
 
 
-
-        if(localDate1.isAfter(localDate2)){//FIRST DATE IS AFTER DATE2
+        if (localDate1.isAfter(localDate2)) {//FIRST DATE IS AFTER DATE2
             return ResponseEntity.badRequest().build();
         }
-        logger.info("History by this date1=" + date1Text + " date2=" + date2Text + "AND KIND OF EVENTS = " + nameKindEvent + " WAS SEND" );
+        logger.info("History by this date1=" + date1Text + " date2=" + date2Text + "AND KIND OF EVENTS = " + nameKindEvent + " WAS SEND");
         return ResponseEntity.ok(readyToSendDTOs);
     }
 }

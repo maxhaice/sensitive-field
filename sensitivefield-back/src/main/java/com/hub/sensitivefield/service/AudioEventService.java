@@ -94,13 +94,13 @@ public class AudioEventService {
 
     public boolean saveAudioEvent(newAudioEventDTO newAudioEventDTO) {
         Optional<AudioSensor> audioSensor = audioSensorRepository.findById(newAudioEventDTO.getSensor_id());
-        if(audioSensor.isEmpty()){
+        if (audioSensor.isEmpty()) {
             System.out.println("audiosensor is empty");
             Latitude latitude = new Latitude(newAudioEventDTO.getSensor_coordinates().get(0).asDouble());
             Longitude longitude = new Longitude(newAudioEventDTO.getSensor_coordinates().get(1).asDouble());
             ID id = new ID(newAudioEventDTO.getSensor_id());
             audioSensorRepository.save(new AudioSensor(id,
-                     latitude,
+                    latitude,
                     longitude));
         }
         System.out.println("what'swrong");
@@ -184,20 +184,18 @@ public class AudioEventService {
         );
     }
 
-    private KindEvent checkDefaultValueOfKindEvent(String typeSource1){
+    private KindEvent checkDefaultValueOfKindEvent(String typeSource1) {
         Optional<KindEvent> optionalKindEvent1 = kindEventService.getByName("default");
         KindEvent kindEvent = null;
         Optional<KindEvent> optionalKindEvent = kindEventService.getByName(typeSource1);
         System.out.println(typeSource1);
-        if(optionalKindEvent.isPresent()){
+        if (optionalKindEvent.isPresent()) {
             kindEvent = optionalKindEvent.get();
-        }
-        else{
-            if(optionalKindEvent1.isPresent()){
+        } else {
+            if (optionalKindEvent1.isPresent()) {
                 kindEvent = optionalKindEvent1.get();
                 logger.warn("kindEvent hasn't value like a typeSource=" + typeSource1 + " and was set default value");
-            }
-            else{
+            } else {
                 kindEventService.saveKindEvent(new newKindEventDTO("default", "default", PriorityEvent.Default));
                 kindEvent = kindEventService.getByName("default").get();
                 logger.warn("default value was add to db kindEvent with name=default");

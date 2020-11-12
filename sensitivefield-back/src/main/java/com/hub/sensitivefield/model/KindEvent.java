@@ -38,9 +38,10 @@ public class KindEvent {
         this.audioEventList = new ArrayList<>();
     }
 
-    public KindEvent(){
+    public KindEvent() {
         this.audioEventList = new ArrayList<>();
     }
+
     public int getId() {
         return id;
     }

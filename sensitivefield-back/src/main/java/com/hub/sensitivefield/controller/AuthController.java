@@ -58,8 +58,7 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             logger.info("USER with usesname=" + loginRequest.getUsername() + " was successful login");
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-        }
-        catch (HttpClientErrorException.Unauthorized e){
+        } catch (HttpClientErrorException.Unauthorized e) {
             logger.info("User login - bad data");
             return ResponseEntity.status(401).body("Wrong password or username");
         }
