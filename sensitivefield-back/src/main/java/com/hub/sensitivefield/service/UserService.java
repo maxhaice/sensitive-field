@@ -1,7 +1,6 @@
 package com.hub.sensitivefield.service;
 
 import com.hub.sensitivefield.DTO.UserDTO;
-import com.hub.sensitivefield.DTO.newDTO.newUserDTO;
 import com.hub.sensitivefield.model.User;
 import com.hub.sensitivefield.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class UserService {
         } else {
             User user = userOptional.get();
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            if(!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())){
+            if (!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())) {
                 System.out.println("matches false");
                 return false;
             }
@@ -67,7 +66,7 @@ public class UserService {
         } else {
             User user = userOptional.get();
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            if(!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())){
+            if (!bCryptPasswordEncoder.matches(oldpassword, user.getPassword())) {
                 System.out.println("matches false");
                 System.out.println("\"" + oldpassword + "\"");
                 System.out.println("\"" + user.getPassword() + "\"");

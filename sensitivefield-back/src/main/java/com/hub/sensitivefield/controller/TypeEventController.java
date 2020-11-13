@@ -21,9 +21,9 @@ public class TypeEventController {
     @GetMapping("/api/typesvents")
     public ResponseEntity<List<TypeEventDTO>> getAllTypeOfEvents() {
         return ResponseEntity.ok(typeEventService.getAll()
-        .stream()
-        .map(typeEvent -> new TypeEventDTO(typeEvent.getId(), typeEvent.getName()))
-        .collect(Collectors.toList()));
+                .stream()
+                .map(typeEvent -> new TypeEventDTO(typeEvent.getId(), typeEvent.getName()))
+                .collect(Collectors.toList()));
     }
 
     @GetMapping("/api/typesvents/{name}/")
@@ -46,7 +46,7 @@ public class TypeEventController {
     }
 
     @PostMapping("/api/typesevents")
-    public ResponseEntity<Void> saveTypeEvent(@RequestParam String name){
+    public ResponseEntity<Void> saveTypeEvent(@RequestParam String name) {
         typeEventService.saveTypeEvent(name);
         return ResponseEntity.ok().build();
     }

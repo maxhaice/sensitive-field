@@ -7,10 +7,12 @@ import com.hub.sensitivefield.DTO.newDTO.newKindEventDTO;
 import com.hub.sensitivefield.ValueObjects.ID;
 import com.hub.sensitivefield.ValueObjects.Latitude;
 import com.hub.sensitivefield.ValueObjects.Longitude;
-import com.hub.sensitivefield.model.*;
+import com.hub.sensitivefield.model.AudioEvent;
+import com.hub.sensitivefield.model.AudioSensor;
+import com.hub.sensitivefield.model.KindEvent;
+import com.hub.sensitivefield.model.PriorityEvent;
 import com.hub.sensitivefield.repository.AudioEventRepository;
 import com.hub.sensitivefield.repository.AudioSensorRepository;
-import jdk.jshell.Snippet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,43 @@ public class AudioEventService {
     @Autowired
     private KindEventService kindEventService;
 
+    public static AudioEventDTO convertToDTO(AudioEvent audioEvent) {
+        return new AudioEventDTO(
+                audioEvent.getId(),
+                audioEvent.getAudioSensor().getId(),
+                audioEvent.getAudioSensor().getLatitude(),
+                audioEvent.getAudioSensor().getLongitude(),
+                audioEvent.getLatitude(),
+                audioEvent.getLongitude(),
+                audioEvent.getDateServer(),
+                audioEvent.getDateReal(),
+                audioEvent.getTypeSource1(),
+                audioEvent.getPersistenceSource1(),
+                audioEvent.getTypeSource2(),
+                audioEvent.getPersistenceSource2(),
+                audioEvent.getTypeSource3(),
+                audioEvent.getPersistenceSource3(),
+                audioEvent.isDeleted(),
+                audioEvent.getKindEvent()
+        );
+    }
+
+    public static AudioEventDTOwithoutSensor convertToDTOWithoutEvents(AudioEvent audioEvent) {
+        return new AudioEventDTOwithoutSensor(
+                audioEvent.getId(),
+                audioEvent.getDateServer(),
+                audioEvent.getDateReal(),
+                audioEvent.getTypeSource1(),
+                audioEvent.getPersistenceSource1(),
+                audioEvent.getTypeSource2(),
+                audioEvent.getPersistenceSource2(),
+                audioEvent.getTypeSource3(),
+                audioEvent.getPersistenceSource3(),
+                audioEvent.isDeleted(),
+                audioEvent.getKindEvent()
+        );
+    }
+
     public Optional<AudioEvent> getAudioEventById(int id) {
         return audioEventRepository.findById(id);
     }
@@ -55,13 +94,13 @@ public class AudioEventService {
 
     public boolean saveAudioEvent(newAudioEventDTO newAudioEventDTO) {
         Optional<AudioSensor> audioSensor = audioSensorRepository.findById(newAudioEventDTO.getSensor_id());
-        if(audioSensor.isEmpty()){
+        if (audioSensor.isEmpty()) {
             System.out.println("audiosensor is empty");
             Latitude latitude = new Latitude(newAudioEventDTO.getSensor_coordinates().get(0).asDouble());
             Longitude longitude = new Longitude(newAudioEventDTO.getSensor_coordinates().get(1).asDouble());
             ID id = new ID(newAudioEventDTO.getSensor_id());
             audioSensorRepository.save(new AudioSensor(id,
-                     latitude,
+                    latitude,
                     longitude));
         }
         System.out.println("what'swrong");
@@ -145,62 +184,23 @@ public class AudioEventService {
         );
     }
 
-    private KindEvent checkDefaultValueOfKindEvent(String typeSource1){
+    private KindEvent checkDefaultValueOfKindEvent(String typeSource1) {
         Optional<KindEvent> optionalKindEvent1 = kindEventService.getByName("default");
         KindEvent kindEvent = null;
         Optional<KindEvent> optionalKindEvent = kindEventService.getByName(typeSource1);
         System.out.println(typeSource1);
-        if(optionalKindEvent.isPresent()){
+        if (optionalKindEvent.isPresent()) {
             kindEvent = optionalKindEvent.get();
-        }
-        else{
-            if(optionalKindEvent1.isPresent()){
+        } else {
+            if (optionalKindEvent1.isPresent()) {
                 kindEvent = optionalKindEvent1.get();
                 logger.warn("kindEvent hasn't value like a typeSource=" + typeSource1 + " and was set default value");
-            }
-            else{
+            } else {
                 kindEventService.saveKindEvent(new newKindEventDTO("default", "default", PriorityEvent.Default));
                 kindEvent = kindEventService.getByName("default").get();
                 logger.warn("default value was add to db kindEvent with name=default");
             }
         }
         return kindEvent;
-    }
-
-    public static AudioEventDTO convertToDTO(AudioEvent audioEvent) {
-        return new AudioEventDTO(
-                audioEvent.getId(),
-                audioEvent.getAudioSensor().getId(),
-                audioEvent.getAudioSensor().getLatitude(),
-                audioEvent.getAudioSensor().getLongitude(),
-                audioEvent.getLatitude(),
-                audioEvent.getLongitude(),
-                audioEvent.getDateServer(),
-                audioEvent.getDateReal(),
-                audioEvent.getTypeSource1(),
-                audioEvent.getPersistenceSource1(),
-                audioEvent.getTypeSource2(),
-                audioEvent.getPersistenceSource2(),
-                audioEvent.getTypeSource3(),
-                audioEvent.getPersistenceSource3(),
-                audioEvent.isDeleted(),
-                audioEvent.getKindEvent()
-        );
-    }
-
-    public static AudioEventDTOwithoutSensor convertToDTOWithoutEvents(AudioEvent audioEvent) {
-        return new AudioEventDTOwithoutSensor(
-                audioEvent.getId(),
-                audioEvent.getDateServer(),
-                audioEvent.getDateReal(),
-                audioEvent.getTypeSource1(),
-                audioEvent.getPersistenceSource1(),
-                audioEvent.getTypeSource2(),
-                audioEvent.getPersistenceSource2(),
-                audioEvent.getTypeSource3(),
-                audioEvent.getPersistenceSource3(),
-                audioEvent.isDeleted(),
-                audioEvent.getKindEvent()
-        );
     }
 }

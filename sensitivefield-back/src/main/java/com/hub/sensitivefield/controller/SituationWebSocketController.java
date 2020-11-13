@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SituationWebSocketController {
 
-    private static Logger logger = LoggerFactory.getLogger(SituationWebSocketController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SituationWebSocketController.class);
 
     @Autowired
     private SituationWebSocketService situationWebSocketService;

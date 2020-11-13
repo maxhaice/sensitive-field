@@ -8,7 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,18 @@ import java.util.List;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AudioSensor {
+
+    @Id
+    @Column(name = "id")
+    private int id;
+    @Column(name = "latitude")
+    private double latitude;
+    @Column(name = "longitude")
+    private double longitude;
+    @Column(name = "name")
+    private String name;
+    @OneToMany(mappedBy = "audioSensor")
+    private List<AudioEvent> audioEvents;
 
     public AudioSensor(ID id, Latitude latitude, Longitude longitude) {
         this.id = id.getValue();
@@ -33,23 +48,6 @@ public class AudioSensor {
         this.audioEvents = new ArrayList<>();
         this.name = name;
     }
-
-    @Id
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "latitude")
-    private double latitude;
-
-    @Column(name = "longitude")
-    private double longitude;
-
-    @Column(name = "name")
-    private String name;
-
-    @OneToMany(mappedBy = "audioSensor")
-    private List<AudioEvent> audioEvents;
-
 
     public void addAudioEvent(AudioEvent audioEvent) {
         List<AudioEvent> audioEvents = getAudioEvents();

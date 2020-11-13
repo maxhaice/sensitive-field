@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 public class AudioEventController {
 
-    private static Logger logger = LoggerFactory.getLogger(AudioEventController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AudioEventController.class);
 
     @Autowired
     AudioEventService audioEventService;
@@ -63,7 +64,7 @@ public class AudioEventController {
                 break;
             }
         }
-        logger.info("AudioEvent with id=" + (id+1) +" WAS SEND");
+        logger.info("AudioEvent with id=" + (id + 1) + " WAS SEND");
         return ResponseEntity.ok(AudioEventService.convertToDTO(audioEvents.get(index)));
     }
 
@@ -71,7 +72,7 @@ public class AudioEventController {
     private ResponseEntity<AudioEventDTO> getPreviousAudioEvent(@PathVariable int id) {
         Optional<AudioEvent> optionalAudioEvent = audioEventService.getAudioEventById(id);
         if (optionalAudioEvent.isEmpty()) {
-            logger.info("AudioEvent with id=" + id +" WASN'T FOUND");
+            logger.info("AudioEvent with id=" + id + " WASN'T FOUND");
             return ResponseEntity.noContent().build();
         }
         AudioEvent tempAudioEvent = optionalAudioEvent.get();
@@ -88,7 +89,7 @@ public class AudioEventController {
                 break;
             }
         }
-        logger.info("AudioEvent with id=" + (id+1) +" WAS SEND");
+        logger.info("AudioEvent with id=" + (id + 1) + " WAS SEND");
         return ResponseEntity.ok(AudioEventService.convertToDTO(audioEvents.get(index)));
     }
 
@@ -100,18 +101,16 @@ public class AudioEventController {
     }
 
 
-
     @PostMapping("/api/audio-events/")
     private ResponseEntity<?> addAudioEvent(@RequestBody newAudioEventDTO newAudioEventDTO) {
         System.out.println("WTF1");
-        if(audioEventService.saveAudioEvent(newAudioEventDTO)){
+        if (audioEventService.saveAudioEvent(newAudioEventDTO)) {
             logger.info("AudioEvent was save");
             System.out.println("wtf2");
             return ResponseEntity.ok().build();
-        }
-        else{
+        } else {
             System.out.println("wtf3");
-            logger.info("AudioEvent wasn't save because sensor with id=" +newAudioEventDTO.getSensor_id()+" WASN'T FOUND");
+            logger.info("AudioEvent wasn't save because sensor with id=" + newAudioEventDTO.getSensor_id() + " WASN'T FOUND");
             return ResponseEntity.ok("New sensor was added");
         }
     }

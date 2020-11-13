@@ -15,20 +15,19 @@ public class TypeEventService {
     @Autowired
     private TypeEventRepository typeEventRepository;
 
-    public List<TypeEvent> getAll(){
+    public List<TypeEvent> getAll() {
         return typeEventRepository.findAll();
     }
 
-    public Optional<TypeEvent> getTypeEventByName(String name){
+    public Optional<TypeEvent> getTypeEventByName(String name) {
         return typeEventRepository.findByName(name);
     }
 
-    public boolean deleteTypeEvent(int id){
+    public boolean deleteTypeEvent(int id) {
         Optional<TypeEvent> optionalTypeEvent = typeEventRepository.findById(id);
-        if(optionalTypeEvent.isEmpty()){
+        if (optionalTypeEvent.isEmpty()) {
             return false;
-        }
-        else{
+        } else {
             typeEventRepository.deleteById(id);
             return true;
         }

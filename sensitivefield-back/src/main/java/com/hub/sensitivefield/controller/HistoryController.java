@@ -2,23 +2,17 @@ package com.hub.sensitivefield.controller;
 
 import com.hub.sensitivefield.DTO.AudioEventDTO;
 import com.hub.sensitivefield.DTO.AudioEventDTOwithoutSensor;
-import com.hub.sensitivefield.DTO.AudioSensorDTO;
 import com.hub.sensitivefield.DTO.AudioSensorDTOwithEvents;
 import com.hub.sensitivefield.model.AudioEvent;
-import com.hub.sensitivefield.model.AudioSensor;
 import com.hub.sensitivefield.service.AudioEventService;
 import com.hub.sensitivefield.service.AudioSensorService;
-import io.swagger.models.Response;
-import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,18 +75,17 @@ public class HistoryController {
                 }
             }
 
-            if (readyToAddToSensor.stream().count()!=0) {
+            if (readyToAddToSensor.stream().count() != 0) {
                 audioSensorDTOwithEvents.setAudioEventDTOList(readyToAddToSensor);
                 readyToSendDTOs.add(audioSensorDTOwithEvents);
             }
         }
 
 
-
-        if(localDate1.isAfter(localDate2)){//FIRST DATE IS AFTER DATE2
+        if (localDate1.isAfter(localDate2)) {//FIRST DATE IS AFTER DATE2
             return ResponseEntity.badRequest().build();
         }
-        logger.info("History by this date1=" + date1Text + " date2=" + date2Text + "AND KIND OF EVENTS = " + nameKindEvent + " WAS SEND" );
+        logger.info("History by this date1=" + date1Text + " date2=" + date2Text + "AND KIND OF EVENTS = " + nameKindEvent + " WAS SEND");
         return ResponseEntity.ok(readyToSendDTOs);
     }
 }

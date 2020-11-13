@@ -21,52 +21,50 @@ public class KindEventService {
     @Autowired
     private KindEventRepository kindEventRepository;
 
-    public List<KindEvent> getAll(){
+    public List<KindEvent> getAll() {
         return kindEventRepository.findAll();
     }
 
-    public Optional<KindEvent> getByName(String name){
+    public Optional<KindEvent> getByName(String name) {
         return Optional.ofNullable(kindEventRepository.findByName(name));
     }
 
-    public List<KindEvent> getAllByPriority(PriorityEvent priorityEvent){
+    public List<KindEvent> getAllByPriority(PriorityEvent priorityEvent) {
         return kindEventRepository.findAllByPriority(priorityEvent.name());
     }
 
-    public boolean deleteById(int id){
+    public boolean deleteById(int id) {
         Optional<KindEvent> optionalKindEvent = kindEventRepository.findById(id);
-        if(optionalKindEvent.isEmpty()){
+        if (optionalKindEvent.isEmpty()) {
             return false;
-        }
-        else{
+        } else {
             kindEventRepository.deleteById(id);
             return true;
         }
     }
 
-    public boolean saveKindEvent(newKindEventDTO newKindEventDTO){
+    public boolean saveKindEvent(newKindEventDTO newKindEventDTO) {
         Optional<TypeEvent> optionalTypeEvent = typeEventService.getTypeEventByName(newKindEventDTO.getTypeEvent());
-        if(optionalTypeEvent.isPresent()){
+        if (optionalTypeEvent.isPresent()) {
             KindEvent kindEvent = new KindEvent();
             kindEvent.setName(newKindEventDTO.getName());
             kindEvent.setPriority(PriorityEvent.valueOf(newKindEventDTO.getPriorityEvent()));
             kindEvent.setTypeEvent(optionalTypeEvent.get());
             kindEventRepository.save(kindEvent);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public KindEventDTO convertToDTO(KindEvent kindEvent){
+    public KindEventDTO convertToDTO(KindEvent kindEvent) {
         return new KindEventDTO(kindEvent.getId(), kindEvent.getName(), kindEvent.getTypeEvent(), kindEvent.getPriority());
     }
 
-    public KindEvent convertFromDTO(newKindEventDTO newKindEventDTO){
+    public KindEvent convertFromDTO(newKindEventDTO newKindEventDTO) {
         Optional<TypeEvent> optionalTypeEvent = typeEventService.getTypeEventByName(newKindEventDTO.getTypeEvent());
         TypeEvent typeEvent = null;
-        if(optionalTypeEvent.isEmpty()){
+        if (optionalTypeEvent.isEmpty()) {
             typeEventService.saveTypeEvent(newKindEventDTO.getTypeEvent());
             typeEvent = typeEventService.getTypeEventByName(newKindEventDTO.getName()).get();
         }

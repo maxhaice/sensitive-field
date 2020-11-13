@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AudioSensorRepository extends JpaRepository<AudioSensor, Integer> {
-    public AudioSensor getByName(String name);
+    AudioSensor getByName(String name);
 }

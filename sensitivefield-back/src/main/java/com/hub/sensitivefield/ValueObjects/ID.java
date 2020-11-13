@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ID {
-    private static Logger logger = LoggerFactory.getLogger(ID.class);
+    private static final Logger logger = LoggerFactory.getLogger(ID.class);
+    private final int id;
+
     public ID(int id) {
         if (!ID.isValid(id)) {
             logger.error("id invalid");
@@ -14,7 +16,6 @@ public class ID {
         this.id = id;
     }
 
-    private int id;
 
     public int getValue() {
         return this.id;

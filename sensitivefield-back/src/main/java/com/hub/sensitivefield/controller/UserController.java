@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
 
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/api/users/login/{login}")
-    private ResponseEntity<UserDTO> getUserByLogin(@PathVariable String login){
+    private ResponseEntity<UserDTO> getUserByLogin(@PathVariable String login) {
         Optional<User> optionalUser = userService.getUserByLogin(login);
         if (optionalUser.isEmpty()) {
             logger.info("User with login=" + login + " WASN'T FOUND");

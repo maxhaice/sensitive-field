@@ -1,11 +1,5 @@
 package com.hub.sensitivefield.controller;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.Valid;
-
 import com.hub.sensitivefield.jwt.JwtProvider;
 import com.hub.sensitivefield.messages.JwtResponse;
 import com.hub.sensitivefield.messages.LoginForm;
@@ -30,27 +24,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.validation.Valid;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
     UserService userService;
-
     @Autowired
     RoleService roleService;
-
     @Autowired
     PasswordEncoder encoder;
-
     @Autowired
     JwtProvider jwtProvider;
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -64,8 +58,7 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             logger.info("USER with usesname=" + loginRequest.getUsername() + " was successful login");
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-        }
-        catch (HttpClientErrorException.Unauthorized e){
+        } catch (HttpClientErrorException.Unauthorized e) {
             logger.info("User login - bad data");
             return ResponseEntity.status(401).body("Wrong password or username");
         }

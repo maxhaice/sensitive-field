@@ -8,7 +8,7 @@ public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private String username;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public JwtResponse(String accessToken, String username, Collection<? extends GrantedAuthority> authorities) {
         this.token = accessToken;

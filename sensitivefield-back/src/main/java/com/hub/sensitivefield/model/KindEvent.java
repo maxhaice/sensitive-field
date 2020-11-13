@@ -1,7 +1,6 @@
 package com.hub.sensitivefield.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -39,9 +38,10 @@ public class KindEvent {
         this.audioEventList = new ArrayList<>();
     }
 
-    public KindEvent(){
+    public KindEvent() {
         this.audioEventList = new ArrayList<>();
     }
+
     public int getId() {
         return id;
     }

@@ -20,40 +20,37 @@ public class KindEventController {
     private KindEventService kindEventService;
 
     @GetMapping("/api/kindsevenets")
-    public ResponseEntity<List<KindEventDTO>> getAllKindEvents(){
+    public ResponseEntity<List<KindEventDTO>> getAllKindEvents() {
         return ResponseEntity.ok(kindEventService.getAll()
-        .stream()
-        .map(kindEventService::convertToDTO)
-        .collect(Collectors.toList()));
+                .stream()
+                .map(kindEventService::convertToDTO)
+                .collect(Collectors.toList()));
     }
 
     @DeleteMapping("/api/kindsevenets/{id}/delete")
-    public ResponseEntity<Void> deleteKindEvent(@PathVariable  int id){
-        if(kindEventService.deleteById(id)){
+    public ResponseEntity<Void> deleteKindEvent(@PathVariable int id) {
+        if (kindEventService.deleteById(id)) {
             return ResponseEntity.ok().build();
-        }
-        else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/api/kindsevenets/{name}")
-    public ResponseEntity<KindEventDTO> getKindEventByName(@PathVariable String name){
+    public ResponseEntity<KindEventDTO> getKindEventByName(@PathVariable String name) {
         Optional<KindEvent> optionalKindEvent = kindEventService.getByName(name);
-        if(optionalKindEvent.isEmpty()){
+        if (optionalKindEvent.isEmpty()) {
             return ResponseEntity.notFound().build();
-        }
-        else{
+        } else {
             return ResponseEntity.ok(kindEventService.convertToDTO(optionalKindEvent.get()));
         }
     }
 
     @PostMapping("/api/kindsevents")
-    public ResponseEntity<Void> saveKindEvents(@RequestBody newKindEventDTO newKindEventDTO){
-        if(kindEventService.saveKindEvent(newKindEventDTO)){
+    public ResponseEntity<Void> saveKindEvents(@RequestBody newKindEventDTO newKindEventDTO) {
+        if (kindEventService.saveKindEvent(newKindEventDTO)) {
             return ResponseEntity.ok().build();
-        }
-        else{
+        } else {
             return ResponseEntity.noContent().build();
         }
     }
