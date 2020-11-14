@@ -1,0 +1,56 @@
+.vertical-bar{
+    position: absolute;
+
+    right: 0%;
+
+    width: 20.5%;
+    height: 100%;
+
+    color: darkgrey;
+    text-align: center;
+    font-family: fantasy;
+
+    background-color: rgb(23, 23, 23);
+    border-left: solid 1px black;
+}
+input{
+    text-align: center;
+}
+button{
+    width: 70px !important; height: 70px !important;
+    margin-left: auto; margin-right: auto;
+}
+.mat-icon{
+    position: relative;
+    top: 16px;
+    height:60px !important;
+    width:60px !important;
+    font-size:60px !important;
+}
+mat-form-field {
+    background-color: rgb(23, 23, 23);
+    margin-left: auto; margin-right: auto;
+    width: 70%;
+}
+.mat-form-field-label {
+    color: darkgrey !important;
+}
+.mat-form-field-underline {
+    border-bottom: solid 1px darkgrey;
+     background-color: darkgrey !important;;
+}
+.mat-form-field-ripple {
+    background-color: darkgrey !important;
+}
+.mat-focused .mat-form-field-label {
+    color: darkgrey !important;
+}
+.mat-form-field-ripple {
+    background-color: darkgrey !important;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex{
+    background-color: rgb(23, 23, 23) !important;
+}
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: darkgrey;
+}

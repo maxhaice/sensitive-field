@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sensetive-ng-ui": {
+    "sensitive-ng": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sensetive-ng-ui",
+            "outputPath": "dist/sensitive-ng",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,8 +25,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
-              "node_modules/leaflet/dist/leaflet.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -41,7 +40,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -64,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sensetive-ng-ui:build"
+            "browserTarget": "sensitive-ng:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sensetive-ng-ui:build:production"
+              "browserTarget": "sensitive-ng:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sensetive-ng-ui:build"
+            "browserTarget": "sensitive-ng:build"
           }
         },
         "test": {
@@ -87,7 +85,6 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.png",
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -114,16 +111,20 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "sensetive-ng-ui:serve"
+            "devServerTarget": "sensitive-ng:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "sensetive-ng-ui:serve:production"
+              "devServerTarget": "sensitive-ng:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
   },
-  "defaultProject": "sensetive-ng-ui"
+  "defaultProject": "sensitive-ng"
 }

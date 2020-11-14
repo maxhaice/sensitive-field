@@ -1,0 +1,9 @@
+    <header class="video-header">
+        <video autoplay src="assets/static/mars_trim.mp4" autoplay loop playsinline muted autoplay></video>
+      </header>
+    <mat-drawer-container class="grid" autosize>
+        <mat-drawer *ngIf="hide" class="nav" mode="side" position="end" opened>
+            <navbar class="navbar"></navbar>
+        </mat-drawer>
+        <router-outlet></router-outlet>
+    </mat-drawer-container>

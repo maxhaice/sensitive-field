@@ -1,0 +1,44 @@
+.horizontal-bar{
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(24, 24, 24);
+  border-top: solid 1px black;
+
+  display: grid;
+  grid-template-columns: 25px auto;
+}
+.content{
+  display: grid;
+  grid-auto-flow: column;
+}
+/* button{
+  width: 70px !important; height: 70px !important;
+  margin-left: auto; margin-right: auto;
+  color: darkgrey !important;
+  transition: 300ms;
+} */
+.mat-button-toggle{
+  height: 25px !important;
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  color: darkgrey !important;
+  transition: 300ms;
+  background: transparent !important;
+}
+::ng-deep .mat-button-toggle-label-content {
+  line-height: 25px !important;
+}
+.mat-button-toggle-group{
+  width: 25px !important; height: 60px !important; 
+}
+.mat-icon{
+  margin-top: 5px;
+  height:50px !important;
+  width:50px !important;
+  font-size:50px !important;
+  transition: 400ms;
+}
