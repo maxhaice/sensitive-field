@@ -1,0 +1,28 @@
+.left{
+  grid-area: navbar;
+  display: grid;
+  grid-auto-flow: row;
+  transition: 200ms;
+  width: auto; height: auto;
+}
+.left:first-child{
+  margin-top: 10px;
+}
+button{
+  width: 60px !important; height: 60px !important;
+  margin-left: auto; margin-right: auto;
+  color: darkgrey !important;
+  transition: 300ms;
+}
+.mat-icon{
+  position: relative;
+  top: 13px;
+  height:50px !important;
+  width:50px !important;
+  font-size:50px !important;
+  transition: 400ms;
+}
+.is-active{
+  color: black !important;
+  background-color: darkgray !important;
+}
