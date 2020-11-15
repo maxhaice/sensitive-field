@@ -14,8 +14,12 @@ public class SituationWebSocketController {
 
     private static final Logger logger = LoggerFactory.getLogger(SituationWebSocketController.class);
 
+    private final SituationWebSocketService situationWebSocketService;
+
     @Autowired
-    private SituationWebSocketService situationWebSocketService;
+    public SituationWebSocketController(SituationWebSocketService situationWebSocketService) {
+        this.situationWebSocketService = situationWebSocketService;
+    }
 
     @MessageMapping("/get-last-events")
     private void getLastEvents(@Header("simpSessionId") String sesionId, Integer count) {

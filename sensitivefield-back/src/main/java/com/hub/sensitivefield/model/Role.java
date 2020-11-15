@@ -16,9 +16,11 @@ import java.util.List;
 public class Role {
     @ManyToMany(cascade = CascadeType.ALL)
     List<User> users;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)

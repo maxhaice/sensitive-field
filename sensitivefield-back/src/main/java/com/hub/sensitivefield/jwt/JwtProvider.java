@@ -12,6 +12,7 @@ import java.util.Date;
 @Component
 public
 class JwtProvider {
+
     @Value("${sensitivefield.app.jwtSecret}")
     private String jwtSecret;
 
@@ -20,7 +21,6 @@ class JwtProvider {
 
     public String generateJwtToken(Authentication authentication) {
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
-
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
@@ -30,14 +30,12 @@ class JwtProvider {
     }
 
     public boolean validateJwtToken(String authToken) {
-
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch (Exception e) {
-            throw new RuntimeException("bad token");
+            return false;
         }
-
     }
 
     public String getUserNameFromJwtToken(String token) {

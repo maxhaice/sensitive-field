@@ -1,10 +1,12 @@
-package com.hub.sensitivefield.ValueObjects;
+package com.hub.sensitivefield.valueobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ID {
+
     private static final Logger logger = LoggerFactory.getLogger(ID.class);
+
     private final int id;
 
     public ID(int id) {
@@ -12,10 +14,8 @@ public class ID {
             logger.error("id invalid");
             throw new IllegalArgumentException("id");
         }
-
         this.id = id;
     }
-
 
     public int getValue() {
         return this.id;

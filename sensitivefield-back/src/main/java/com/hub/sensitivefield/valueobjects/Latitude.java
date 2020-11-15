@@ -1,4 +1,4 @@
-package com.hub.sensitivefield.ValueObjects;
+package com.hub.sensitivefield.valueobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 public class Latitude {
 
     private static final Logger logger = LoggerFactory.getLogger(Latitude.class);
+
     private final double value;
 
     public Latitude(double value) {
@@ -13,7 +14,6 @@ public class Latitude {
             logger.error("Latitude invalid");
             throw new IllegalArgumentException("latitude");
         }
-
         this.value = value;
     }
 

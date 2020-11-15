@@ -1,8 +1,9 @@
 package com.hub.sensitivefield.controller;
 
-import com.hub.sensitivefield.DTO.AudioEventDTO;
-import com.hub.sensitivefield.DTO.AudioEventDTOwithoutSensor;
-import com.hub.sensitivefield.DTO.AudioSensorDTOwithEvents;
+import com.hub.sensitivefield.dto.AudioEventDTO;
+import com.hub.sensitivefield.intermediate.AudioEventWithoutSensor;
+import com.hub.sensitivefield.intermediate.AudioEventWithoutSensor;
+import com.hub.sensitivefield.dto.AudioSensorDTOWithEvents;
 import com.hub.sensitivefield.model.AudioEvent;
 import com.hub.sensitivefield.service.AudioEventService;
 import com.hub.sensitivefield.service.AudioSensorService;
@@ -26,20 +27,24 @@ public class HistoryController {
 
     private static final Logger logger = LoggerFactory.getLogger(AudioSensorController.class);
 
-    @Autowired
-    private AudioEventService audioEventService;
+    private final AudioEventService audioEventService;
+
+    private final AudioSensorService audioSensorService;
 
     @Autowired
-    private AudioSensorService audioSensorService;
+    public HistoryController(AudioEventService audioEventService, AudioSensorService audioSensorService) {
+        this.audioEventService = audioEventService;
+        this.audioSensorService = audioSensorService;
+    }
 
     @GetMapping("/{id}")
     private ResponseEntity<AudioEventDTO> getAudioEventById(@PathVariable int id) {
         Optional<AudioEvent> audioEvent = audioEventService.getAudioEventById(id);
         if (audioEvent.isEmpty()) {
-            logger.info("History event with this id=" + id + " WASN'T FOUND");
+            logger.info("History event with this id = " + id + " WASN'T FOUND");
             return ResponseEntity.noContent().build();
         } else {
-            logger.info("History with id=" + id + " WAS SEND");
+            logger.info("History with id = " + id + " WAS SEND");
             return ResponseEntity.ok(
                     AudioEventService.convertToDTO(audioEvent.get())
             );
@@ -47,7 +52,7 @@ public class HistoryController {
     }
 
     @GetMapping("/")
-    private ResponseEntity<List<AudioSensorDTOwithEvents>> getEventByDate(@RequestParam(name = "date1") String date1Text,
+    private ResponseEntity<List<AudioSensorDTOWithEvents>> getEventByDate(@RequestParam(name = "date1") String date1Text,
                                                                           @RequestParam(name = "date2") String date2Text,
                                                                           @RequestParam List<String> nameKindEvent) {
         LocalDateTime localDate1 = LocalDateTime.parse(date1Text,
@@ -55,18 +60,17 @@ public class HistoryController {
         LocalDateTime localDate2 = LocalDateTime.parse(date2Text,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-        List<AudioSensorDTOwithEvents> audioSensorsDTOwithEvents = audioSensorService.getAllAudioSensorEntity()
+        List<AudioSensorDTOWithEvents> audioSensorsDTOwithEvents = audioSensorService.getAllAudioSensorEntity()
                 .stream()
-                .map(audioSensor -> audioSensorService.convertToDTOwithEvents(audioSensor))
+                .map(audioSensorService::convertToDTOwithEvents)
                 .collect(Collectors.toList());
 
+        List<AudioSensorDTOWithEvents> readyToSendDTOs = new ArrayList<>();
+        for (AudioSensorDTOWithEvents audioSensorDTOwithEvents : audioSensorsDTOwithEvents) {
+            List<AudioEventWithoutSensor> audioEventDTOS = audioSensorDTOwithEvents.getAudioEventDTOList();
+            List<AudioEventWithoutSensor> readyToAddToSensor = new ArrayList<>();
 
-        List<AudioSensorDTOwithEvents> readyToSendDTOs = new ArrayList<>();
-        for (AudioSensorDTOwithEvents audioSensorDTOwithEvents : audioSensorsDTOwithEvents) {
-            List<AudioEventDTOwithoutSensor> audioEventDTOS = audioSensorDTOwithEvents.getAudioEventDTOList();
-            List<AudioEventDTOwithoutSensor> readyToAddToSensor = new ArrayList<>();
-
-            for (AudioEventDTOwithoutSensor audioEventDTO : audioEventDTOS) {
+            for (AudioEventWithoutSensor audioEventDTO : audioEventDTOS) {
                 for (String s : nameKindEvent) {
                     if (audioEventDTO.getKindEvent().equals(s)) {
                         readyToAddToSensor.add(audioEventDTO);
@@ -75,17 +79,17 @@ public class HistoryController {
                 }
             }
 
-            if (readyToAddToSensor.stream().count() != 0) {
+            if ((long) readyToAddToSensor.size() !=0) {
                 audioSensorDTOwithEvents.setAudioEventDTOList(readyToAddToSensor);
                 readyToSendDTOs.add(audioSensorDTOwithEvents);
             }
         }
 
-
-        if (localDate1.isAfter(localDate2)) {//FIRST DATE IS AFTER DATE2
+        if(localDate1.isAfter(localDate2)) {//FIRST DATE IS AFTER DATE2
             return ResponseEntity.badRequest().build();
         }
-        logger.info("History by this date1=" + date1Text + " date2=" + date2Text + "AND KIND OF EVENTS = " + nameKindEvent + " WAS SEND");
+
+        logger.info("History by this date1 = " + date1Text + " date2 = " + date2Text + "AND KIND OF EVENTS = " + nameKindEvent + " WAS SEND" );
         return ResponseEntity.ok(readyToSendDTOs);
     }
 }

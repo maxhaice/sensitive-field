@@ -2,6 +2,7 @@ package com.hub.sensitivefield.config.oAuth2Configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hub.sensitivefield.model.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +13,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UserPrinciple implements UserDetails {
+
     private static final long serialVersionUID = 1L;
 
     private final int id;
 
+    @Getter
     private final String name;
 
     private final String username;
@@ -47,14 +50,6 @@ public class UserPrinciple implements UserDetails {
                 user.getPassword(),
                 authorities
         );
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override

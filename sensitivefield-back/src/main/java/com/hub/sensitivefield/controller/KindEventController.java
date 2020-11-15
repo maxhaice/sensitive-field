@@ -1,7 +1,7 @@
 package com.hub.sensitivefield.controller;
 
-import com.hub.sensitivefield.DTO.KindEventDTO;
-import com.hub.sensitivefield.DTO.newDTO.newKindEventDTO;
+import com.hub.sensitivefield.dto.KindEventDTO;
+import com.hub.sensitivefield.dto.newDTO.NewKindEventDTO;
 import com.hub.sensitivefield.model.KindEvent;
 import com.hub.sensitivefield.service.KindEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,12 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class KindEventController {
 
+    private final KindEventService kindEventService;
+
     @Autowired
-    private KindEventService kindEventService;
+    public KindEventController(KindEventService kindEventService) {
+        this.kindEventService = kindEventService;
+    }
 
     @GetMapping("/api/kindsevenets")
     public ResponseEntity<List<KindEventDTO>> getAllKindEvents() {
@@ -47,8 +51,8 @@ public class KindEventController {
     }
 
     @PostMapping("/api/kindsevents")
-    public ResponseEntity<Void> saveKindEvents(@RequestBody newKindEventDTO newKindEventDTO) {
-        if (kindEventService.saveKindEvent(newKindEventDTO)) {
+    public ResponseEntity<Void> saveKindEvents(@RequestBody NewKindEventDTO newKindEventDTO){
+        if(kindEventService.saveKindEvent(newKindEventDTO)){
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.noContent().build();

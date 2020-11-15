@@ -1,4 +1,4 @@
-package com.hub.sensitivefield.ValueObjects;
+package com.hub.sensitivefield.valueobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 public class Longitude {
 
     private static final Logger logger = LoggerFactory.getLogger(Longitude.class);
+
     private double value;
 
     private Longitude() {

@@ -25,7 +25,7 @@ public class KindEvent {
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "typevent_id")
+    @JoinColumn(name = "event_type_id")
     private TypeEvent typeEvent;
 
     @OneToMany(mappedBy = "kindEvent")
@@ -56,30 +56,5 @@ public class KindEvent {
 
     public void setPriority(PriorityEvent priority) {
         this.priority = priority.name();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<AudioEvent> getAudioEventList() {
-        return audioEventList;
-    }
-
-    public void setAudioEventList(List<AudioEvent> audioEventList) {
-        this.audioEventList = audioEventList;
-    }
-
-    public TypeEvent getTypeEvent() {
-        return typeEvent;
-    }
-
-    public void setTypeEvent(TypeEvent typeEvent) {
-        this.typeEvent = typeEvent;
     }
 }

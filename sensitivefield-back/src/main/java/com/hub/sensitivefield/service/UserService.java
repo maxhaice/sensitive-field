@@ -1,6 +1,6 @@
 package com.hub.sensitivefield.service;
 
-import com.hub.sensitivefield.DTO.UserDTO;
+import com.hub.sensitivefield.dto.UserDTO;
 import com.hub.sensitivefield.model.User;
 import com.hub.sensitivefield.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public Optional<User> getUserById(int id) {
         return userRepository.findById(id);
@@ -82,12 +86,6 @@ public class UserService {
         if (getUserById(id).isEmpty()) return false;
         userRepository.deleteById(id);
         return true;
-    }
-
-    public User convertFromDTO(UserDTO userDTO) {
-        return new User(userDTO.getName(),
-                userDTO.getLogin(),
-                userDTO.getPassword());
     }
 
     public UserDTO convertToDTO(User user) {

@@ -1,11 +1,11 @@
 package com.hub.sensitivefield.service;
 
-import com.hub.sensitivefield.DTO.AudioSensorDTO;
-import com.hub.sensitivefield.DTO.AudioSensorDTOwithEvents;
-import com.hub.sensitivefield.DTO.newDTO.newAudioSensorDTO;
-import com.hub.sensitivefield.ValueObjects.ID;
-import com.hub.sensitivefield.ValueObjects.Latitude;
-import com.hub.sensitivefield.ValueObjects.Longitude;
+import com.hub.sensitivefield.dto.AudioSensorDTO;
+import com.hub.sensitivefield.dto.AudioSensorDTOWithEvents;
+import com.hub.sensitivefield.dto.newDTO.NewAudioSensorDTO;
+import com.hub.sensitivefield.valueobjects.ID;
+import com.hub.sensitivefield.valueobjects.Latitude;
+import com.hub.sensitivefield.valueobjects.Longitude;
 import com.hub.sensitivefield.model.AudioSensor;
 import com.hub.sensitivefield.repository.AudioSensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,12 @@ import java.util.stream.Collectors;
 @Service
 public class AudioSensorService {
 
+    private final AudioSensorRepository audioSensorRepository;
+
     @Autowired
-    private AudioSensorRepository audioSensorRepository;
+    public AudioSensorService(AudioSensorRepository audioSensorRepository) {
+        this.audioSensorRepository = audioSensorRepository;
+    }
 
     public Optional<AudioSensor> getAudioSensorById(int id) {
         return audioSensorRepository.findById(id);
@@ -27,17 +31,17 @@ public class AudioSensorService {
 
     public List<AudioSensorDTO> getAllAudioSensors() {
         return audioSensorRepository.findAll()
-                .stream().map(
-                        this::convertToDTO
-                ).collect(Collectors.toList());
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     public List<AudioSensor> getAllAudioSensorEntity() {
         return audioSensorRepository.findAll();
     }
 
-
-    public AudioSensor getByName(String name) {
+    //TODO: future fix
+    public Optional<AudioSensor> getAudioSensorByName(String name){
         return audioSensorRepository.getByName(name);
     }
 
@@ -51,7 +55,7 @@ public class AudioSensorService {
         return true;
     }
 
-    public void saveAudioSensor(newAudioSensorDTO newAudioSensorDTO) {
+    public void saveAudioSensor(NewAudioSensorDTO newAudioSensorDTO) {
         audioSensorRepository.save(convertFromDTO(newAudioSensorDTO));
     }
 
@@ -73,8 +77,8 @@ public class AudioSensorService {
                 , audioSensor.getLongitude());
     }
 
-    public AudioSensorDTOwithEvents convertToDTOwithEvents(AudioSensor audioSensor) {
-        return new AudioSensorDTOwithEvents(audioSensor.getId(),
+    public AudioSensorDTOWithEvents convertToDTOwithEvents(AudioSensor audioSensor) {
+        return new AudioSensorDTOWithEvents(audioSensor.getId(),
                 audioSensor.getName(),
                 audioSensor.getLatitude(),
                 audioSensor.getLongitude(),
@@ -84,7 +88,7 @@ public class AudioSensorService {
                         .collect(Collectors.toList()));
     }
 
-    public AudioSensor convertFromDTO(newAudioSensorDTO newAudioSensorDTO) {
+    public AudioSensor convertFromDTO(NewAudioSensorDTO newAudioSensorDTO) {
         ID id = new ID(newAudioSensorDTO.getId());
         Latitude latitude = new Latitude(newAudioSensorDTO.getLatitude());
         Longitude longitude = new Longitude(newAudioSensorDTO.getLongitude());
