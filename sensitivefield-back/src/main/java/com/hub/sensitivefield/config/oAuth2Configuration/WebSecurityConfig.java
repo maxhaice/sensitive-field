@@ -5,6 +5,7 @@ import com.hub.sensitivefield.jwt.JwtAuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.time.LocalDate;
 
 @Configuration
 @EnableWebSecurity
@@ -24,11 +24,15 @@ import java.time.LocalDate;
         prePostEnabled = true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
+
+    private final JwtAuthEntryPoint unauthorizedHandler;
 
     @Autowired
-    private JwtAuthEntryPoint unauthorizedHandler;
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthEntryPoint unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
 
     @Bean
     public JwtAuthTokenFilter authenticationJwtTokenFilter() {
@@ -45,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
+        //it needs for @annotation in another class
         return super.authenticationManagerBean();
     }
 
@@ -55,9 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String date = LocalDate.now().toString();
-        String date1 = LocalDate.now().minusDays(1).toString();
-        String date2 = LocalDate.now().minusDays(2).toString();
+//        String date = LocalDate.now().toString();//uncommited variables
+//        String date1 = LocalDate.now().minusDays(1).toString();
+//        String date2 = LocalDate.now().minusDays(2).toString();
         http.cors().and().csrf().disable().
                 authorizeRequests()
                 .antMatchers("/api/auth/signin").permitAll()

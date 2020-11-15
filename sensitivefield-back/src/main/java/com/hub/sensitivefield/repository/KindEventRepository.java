@@ -9,9 +9,10 @@ import java.util.List;
 
 @Repository
 public interface KindEventRepository extends JpaRepository<KindEvent, Integer> {
+
     KindEvent findByName(String name);
 
     List<KindEvent> findAllByPriority(String priority);
 
-    List<KindEvent> findAllByTypeEvent(TypeEvent typeEvent);
+    List<KindEvent> findAllByTypeEvent(TypeEvent typeEvent);//TODO: for future
 }

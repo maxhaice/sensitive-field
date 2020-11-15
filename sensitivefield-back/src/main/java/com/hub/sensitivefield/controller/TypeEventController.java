@@ -1,6 +1,6 @@
 package com.hub.sensitivefield.controller;
 
-import com.hub.sensitivefield.DTO.TypeEventDTO;
+import com.hub.sensitivefield.dto.TypeEventDTO;
 import com.hub.sensitivefield.model.TypeEvent;
 import com.hub.sensitivefield.service.TypeEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,12 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TypeEventController {
 
+    private final TypeEventService typeEventService;
+
     @Autowired
-    private TypeEventService typeEventService;
+    public TypeEventController(TypeEventService typeEventService) {
+        this.typeEventService = typeEventService;
+    }
 
     @GetMapping("/api/typesvents")
     public ResponseEntity<List<TypeEventDTO>> getAllTypeOfEvents() {
@@ -51,4 +55,3 @@ public class TypeEventController {
         return ResponseEntity.ok().build();
     }
 }
-

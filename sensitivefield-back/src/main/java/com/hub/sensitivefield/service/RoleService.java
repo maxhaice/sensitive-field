@@ -11,11 +11,11 @@ import java.util.Optional;
 @Service
 public class RoleService {
 
-    @Autowired
-    RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-    public void save(Role role) {
-        roleRepository.save(role);
+    @Autowired
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     public Optional<Role> findByName(RoleName roleName) {

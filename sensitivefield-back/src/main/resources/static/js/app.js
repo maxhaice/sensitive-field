@@ -1,4 +1,4 @@
-var stompClient = null;
+let stompClient = null;
 
 
 function setConnected(connected) {
@@ -14,7 +14,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/connect');
+    let socket = new SockJS('/connect');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -63,16 +63,3 @@ function disconnect() {
 //function sendName() {
 //    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 //}
-
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
-}
-
-$(function () {
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
-});

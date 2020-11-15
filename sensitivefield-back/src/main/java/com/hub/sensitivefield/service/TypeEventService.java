@@ -12,8 +12,12 @@ import java.util.Optional;
 @Service
 public class TypeEventService {
 
+    private final TypeEventRepository typeEventRepository;
+
     @Autowired
-    private TypeEventRepository typeEventRepository;
+    public TypeEventService(TypeEventRepository typeEventRepository) {
+        this.typeEventRepository = typeEventRepository;
+    }
 
     public List<TypeEvent> getAll() {
         return typeEventRepository.findAll();
@@ -37,6 +41,7 @@ public class TypeEventService {
         TypeEvent typeEvent = new TypeEvent();
         typeEvent.setName(name);
         typeEvent.setKindEvent(new ArrayList<>());
+
         typeEventRepository.save(typeEvent);
     }
 }

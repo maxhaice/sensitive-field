@@ -1,5 +1,11 @@
 package com.hub.sensitivefield.controller;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.validation.Valid;
+
 import com.hub.sensitivefield.jwt.JwtProvider;
 import com.hub.sensitivefield.messages.JwtResponse;
 import com.hub.sensitivefield.messages.LoginForm;
@@ -18,16 +24,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-
-import javax.validation.Valid;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -35,16 +37,25 @@ import java.util.Set;
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+    private final AuthenticationManager authenticationManager;
+
+    private final UserService userService;
+
+    private final RoleService roleService;
+
+    private final PasswordEncoder encoder;
+
+    private final JwtProvider jwtProvider;
+
     @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    UserService userService;
-    @Autowired
-    RoleService roleService;
-    @Autowired
-    PasswordEncoder encoder;
-    @Autowired
-    JwtProvider jwtProvider;
+    public AuthController(AuthenticationManager authenticationManager, UserService userService, RoleService roleService, PasswordEncoder encoder, JwtProvider jwtProvider) {
+        this.authenticationManager = authenticationManager;
+        this.userService = userService;
+        this.roleService = roleService;
+        this.encoder = encoder;
+        this.jwtProvider = jwtProvider;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -58,12 +69,11 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             logger.info("USER with usesname=" + loginRequest.getUsername() + " was successful login");
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-        } catch (HttpClientErrorException.Unauthorized e) {
+        }
+        catch (HttpClientErrorException.Unauthorized e){
             logger.info("User login - bad data");
             return ResponseEntity.status(401).body("Wrong password or username");
         }
-
-
     }
 
     @PostMapping("/addUser")
@@ -112,7 +122,7 @@ public class AuthController {
 
         user.setRoles(roles);
         userService.addUser(user);
-        logger.info("Register new user=" + user.getLogin() + " was successful");
+        logger.info("Register new user = " + user.getLogin() + " was successful");
         return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
     }
 }
