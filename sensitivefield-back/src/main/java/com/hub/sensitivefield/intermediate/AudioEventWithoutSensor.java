@@ -2,9 +2,12 @@ package com.hub.sensitivefield.intermediate;
 
 import com.hub.sensitivefield.model.KindEvent;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class AudioEventWithoutSensor {
 
         private final int id;
@@ -27,7 +30,6 @@ public class AudioEventWithoutSensor {
 
         private final boolean isDeleted;
 
-        @Getter
         private final String kindEvent;
 
 

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +33,19 @@ public class AudioSensor {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "date")
+    private LocalDateTime dateTime;
+
     @OneToMany(mappedBy = "audioSensor", cascade = CascadeType.ALL)
     private List<AudioEvent> audioEvents;
 
-    public AudioSensor(ID id, Latitude latitude, Longitude longitude) {
+    public AudioSensor(ID id, Latitude latitude, Longitude longitude, LocalDateTime dateTime) {
         this.id = id.getValue();
         this.latitude = latitude.getValue();
         this.longitude = longitude.getValue();
         this.audioEvents = new ArrayList<>();
         this.name = "blank";
+        this.dateTime = dateTime;
     }
     public void addAudioEvent(AudioEvent audioEvent) {
         List<AudioEvent> audioEvents = getAudioEvents();

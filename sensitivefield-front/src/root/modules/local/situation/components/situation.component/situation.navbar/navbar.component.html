@@ -1,5 +1,5 @@
 <div class="horizontal-bar">
-  <mat-button-toggle-group appearance="legacy" name="navbar" [value]="'sensor'" vertical>
+  <mat-button-toggle-group appearance="legacy" name="navbar" [value]="'sensor'" vertical (click)="sidebar()">
     <mat-button-toggle value="event">
       <mat-icon style="
       height:22px !important;
@@ -21,10 +21,20 @@
     ">surround_sound</mat-icon>
     </mat-button-toggle>
   </mat-button-toggle-group>
+  <!-- <div class="navig">
+    <button class="b_navig" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+     
+    </button>
+    <button class="b_navig" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+      
+    </button>
+  </div>  -->
+
   <div *ngIf="false" class="content">
     <div class="content">
     </div>
   </div>
-  <time-line [input]="audioEvents">
-  </time-line>
+
+  <!-- <time-line>
+  </time-line> -->
 </div>
