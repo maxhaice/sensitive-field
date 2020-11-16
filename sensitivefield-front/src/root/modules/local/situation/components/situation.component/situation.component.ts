@@ -12,8 +12,8 @@ import { TokenStorageService } from 'src/root/services/local-storage/token.stora
 })
 export class SituationComponent implements AfterViewInit{
   public authority: string;
-  public events: BehaviorSubject<AudioEvent> = new BehaviorSubject<AudioEvent>(null);
-  public sensors: AudioSensor;
+  public events: BehaviorSubject<AudioEvent[]> = new BehaviorSubject<AudioEvent[]>(null);
+  public sensors: AudioSensor[];
   constructor(private tokenStorage: TokenStorageService, private router: Router, private ws: WebSocketService) {}
 
   ngAfterViewInit(): void {
