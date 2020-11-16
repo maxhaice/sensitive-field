@@ -14,10 +14,11 @@ export class ApiService{
     }
     public _es: EventSystem;
     public _ss: SensorSystem;
-    private tieEventsInTouch() {
+    private tieEventsInTouch(): EventSystem {
         this._ws._toDictionary("/topic/new-event",false,(value)=>{
             this._es.eventOnTouch.push(value);
         });
+        return this._es;
     }
     public getEvents(dateStart: string, dateEnd: string): EventSystem{
         this._http.get<AudioEvent[]>('http://localhost:8080/api/history?date=' + dateStart).subscribe(done => {
@@ -31,6 +32,13 @@ export class ApiService{
                   this._ss.sensors = done;
                 }, er => {
                 });
+        return this._ss;
+    }
+    public getSensorsByPage(page: number): SensorSystem {
+        this._http.get<any>('/page/' + page).subscribe(done => {
+            this._ss.sensors = done.audioSensors;
+          }, er => {
+          });
         return this._ss;
     }
 }
