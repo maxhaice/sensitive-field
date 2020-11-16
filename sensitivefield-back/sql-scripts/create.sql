@@ -7,6 +7,12 @@ CREATE TABLE `audio_sensor` (
                                 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `event_type` (
+                              `id` int NOT NULL AUTO_INCREMENT,
+                              `name` varchar(255) DEFAULT NULL,
+                              PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `event_kind` (
                               `id` int NOT NULL AUTO_INCREMENT,
                               `name` varchar(255) DEFAULT NULL,
@@ -15,12 +21,6 @@ CREATE TABLE `event_kind` (
                               PRIMARY KEY (`id`),
                               KEY `FKk85lsgswour5fcio0l005wqwt` (`type_event_id`),
                               CONSTRAINT `FKk85lsgswour5fcio0l005wqwt` FOREIGN KEY (`type_event_id`) REFERENCES `event_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `event_type` (
-                              `id` int NOT NULL AUTO_INCREMENT,
-                              `name` varchar(255) DEFAULT NULL,
-                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `audio_event` (
@@ -54,6 +54,13 @@ CREATE TABLE `user` (
                         UNIQUE KEY `UKew1hvam8uwaknuaellwhqchhb` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `role` (
+                        `id` bigint NOT NULL AUTO_INCREMENT,
+                        `name` varchar(60) DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        UNIQUE KEY `UK_epk9im9l9q67xmwi4hbed25do` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `user_roles` (
                               `user_id` int NOT NULL,
                               `role_id` bigint NOT NULL,
@@ -61,11 +68,4 @@ CREATE TABLE `user_roles` (
                               KEY `FKrhfovtciq1l558cw6udg0h0d3` (`role_id`),
                               CONSTRAINT `FK55itppkw3i07do3h7qoclqd4k` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
                               CONSTRAINT `FKrhfovtciq1l558cw6udg0h0d3` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `role` (
-                        `id` bigint NOT NULL AUTO_INCREMENT,
-                        `name` varchar(60) DEFAULT NULL,
-                        PRIMARY KEY (`id`),
-                        UNIQUE KEY `UK_epk9im9l9q67xmwi4hbed25do` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
