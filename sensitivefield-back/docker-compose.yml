@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+    back-mysql:
+        image: mysql
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=73MnYG5qaEq
+            - MYSQL_DATABASE=SensitiveField
+        volumes:
+            - type: bind
+              source: ./db-data
+              target: /var/lib/mysql
+        ports:
+            - "3306:3306"

@@ -1,7 +1,7 @@
 package com.hub.sensitivefield.service;
 
 import com.hub.sensitivefield.dto.AudioEventDTO;
-import com.hub.sensitivefield.intermediate.AudioEventWithoutSensor;
+import com.hub.sensitivefield.intermediate.*;
 import com.hub.sensitivefield.dto.newDTO.NewAudioEventDTO;
 import com.hub.sensitivefield.dto.newDTO.NewKindEventDTO;
 import com.hub.sensitivefield.valueobjects.ID;
@@ -66,7 +66,8 @@ public class AudioEventService {
             audioSensorRepository.save(new AudioSensor(
                     id,
                     latitude,
-                    longitude));
+                    longitude,
+                    LocalDateTime.now()));
         }
         AudioEvent audioEvent = convertFromDTO(newAudioEventDTO);
         audioEventRepository.save(audioEvent);

@@ -1,8 +1,7 @@
 package com.hub.sensitivefield.controller;
 
 import com.hub.sensitivefield.dto.AudioEventDTO;
-import com.hub.sensitivefield.intermediate.AudioEventWithoutSensor;
-import com.hub.sensitivefield.intermediate.AudioEventWithoutSensor;
+import com.hub.sensitivefield.intermediate.*;
 import com.hub.sensitivefield.dto.AudioSensorDTOWithEvents;
 import com.hub.sensitivefield.model.AudioEvent;
 import com.hub.sensitivefield.service.AudioEventService;

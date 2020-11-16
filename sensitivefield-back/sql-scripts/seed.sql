@@ -26,7 +26,7 @@ VALUES ('4', 'dog');
 
 /* Adding default sensor */
 INSERT INTO `sensitive-field`.`audio_sensor` (`id`, `latitude`, `longitude`, `name`)
-VALUES ('1', '50.439002', '30.55552', 'default sensor');
+VALUES ('1', '50.439002', '30.55552', 'default sensor', '2020-11-16 13:27:45.978313');
 
 /* Adding kinds of events */
 INSERT INTO `sensitive-field`.`event_kind` (`id`, `name`, `priority`, `type_event_id`)
