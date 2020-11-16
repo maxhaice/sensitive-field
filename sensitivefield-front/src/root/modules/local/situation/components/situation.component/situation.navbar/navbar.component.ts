@@ -11,12 +11,8 @@ import { ApiService } from 'src/root/services/data-transfer/api/api.service';
   providers: [ApiService]
 })
 export class SituationNavbarComponent implements OnInit{
-  events: AudioEvent[] = [];
-  sensors: AudioSensor[] = [];
+  audioEvents: AudioEvent[] = [];
    constructor(private as: ApiService){}
   ngOnInit(): void {
-    //TODO: events will be in real time!!
-    // this.events = this.as._es.events;
-    // this.sensors = this.as.getSensors().sensors;
   }
 }
