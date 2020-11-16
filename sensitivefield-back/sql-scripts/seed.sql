@@ -24,6 +24,10 @@ VALUES ('3', 't34');
 INSERT INTO `sensitive-field`.`event_type` (`id`, `name`)
 VALUES ('4', 'dog');
 
+/* Adding default sensor */
+INSERT INTO `sensitive-field`.`audio_sensor` (`id`, `latitude`, `longitude`, `name`)
+VALUES ('1', '50.439002', '30.55552', 'default sensor');
+
 /* Adding kinds of events */
 INSERT INTO `sensitive-field`.`event_kind` (`id`, `name`, `priority`, `type_event_id`)
 VALUES ('1', 'ak47', 'Warn', '4');
