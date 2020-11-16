@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
-import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
 import { ApiService } from 'src/root/services/data-transfer/api/api.service';
 
 @Component({
@@ -11,8 +10,12 @@ import { ApiService } from 'src/root/services/data-transfer/api/api.service';
   providers: [ApiService]
 })
 export class SituationNavbarComponent implements OnInit{
-  audioEvents: AudioEvent[] = [];
+  @Input() side;
+  events: AudioEvent[] = [];
    constructor(private as: ApiService){}
   ngOnInit(): void {
+  }
+  sidebar(){
+    this.side.toggle();
   }
 }

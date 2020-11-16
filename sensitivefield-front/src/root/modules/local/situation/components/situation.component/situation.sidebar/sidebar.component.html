@@ -1,0 +1,13 @@
+<div class="side-grid">
+  <div class="events">
+      <div class="event date">
+        today
+      </div>
+      <div class="event" *ngFor="let ae of events">
+        <div class="time">{{ae.dateReal}}</div>
+        <div class="content">{{ae.typeSource1}} - {{ae.persistenceSource1}}</div>
+        <mat-divider></mat-divider>
+        <div class="id">{{ae.sensor_id}}</div>
+      </div>
+  </div>
+</div>
