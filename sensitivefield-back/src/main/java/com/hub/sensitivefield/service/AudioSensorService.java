@@ -11,6 +11,7 @@ import com.hub.sensitivefield.repository.AudioSensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,7 +75,7 @@ public class AudioSensorService {
 
     public AudioSensorDTO convertToDTO(AudioSensor audioSensor) {
         return new AudioSensorDTO(audioSensor.getId(), audioSensor.getLatitude()
-                , audioSensor.getLongitude());
+                , audioSensor.getLongitude(), audioSensor.getDateTime());
     }
 
     public AudioSensorDTOWithEvents convertToDTOwithEvents(AudioSensor audioSensor) {
@@ -85,14 +86,16 @@ public class AudioSensorService {
                 audioSensor.getAudioEvents()
                         .stream()
                         .map(AudioEventService::convertToDTOWithoutEvents)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList()),
+                audioSensor.getDateTime());
     }
 
     public AudioSensor convertFromDTO(NewAudioSensorDTO newAudioSensorDTO) {
         ID id = new ID(newAudioSensorDTO.getId());
         Latitude latitude = new Latitude(newAudioSensorDTO.getLatitude());
         Longitude longitude = new Longitude(newAudioSensorDTO.getLongitude());
-        return new AudioSensor(id, latitude, longitude);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return new AudioSensor(id, latitude, longitude, localDateTime);
     }
 
     public boolean changeAudioSensorName(int id, String name) {
