@@ -1,0 +1,48 @@
+.side-grid{
+  background-color: rgb(24,24,24);
+  width: 200px;
+  height: 100%;
+  overflow: hidden;
+}
+.events{
+  margin: 4px 4px 4px 4px;
+  box-shadow: 2px 2px 2px rgb(0,0,0,0.6),
+              -2px -2px 2px rgb(0,0,0,0.6);
+  border: 2px solid black;
+  display: grid;
+  grid-auto-flow: row;
+}
+.event{
+  cursor: pointer;
+
+  margin: 10px 8px 10px 8px;
+  height: 50px;
+
+  border-radius: 4px;
+
+  background-color: darkgrey;
+  box-shadow: 2px 2px 4px rgb(0,0,0,0.6);
+
+  transition: 200ms;
+}
+.time{
+  text-align: left;
+}
+.content{
+  text-align: center;
+}
+.id{
+  text-align: center;
+}
+.event:hover{
+  transform: scale(1.05);
+}
+.date{
+  height: 20px;
+  margin: 10px 30px 10px 30px;
+
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 6px;
+}

@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { LeafletService } from 'src/root/modules/public/map/services/leaflet.service';
+import { BehaviorSubject } from 'rxjs';
+import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
+import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
+import { WebSocketService } from 'src/root/services/data-transfer/websocket/websocket.service';
 import { TokenStorageService } from 'src/root/services/local-storage/token.storage.service';
 @Component({
   selector: 'situation',
@@ -9,16 +12,19 @@ import { TokenStorageService } from 'src/root/services/local-storage/token.stora
 })
 export class SituationComponent implements AfterViewInit{
   public authority: string;
-  constructor(private tokenStorage: TokenStorageService, private router: Router) {
-  }
+  public events: BehaviorSubject<AudioEvent> = new BehaviorSubject<AudioEvent>(null);
+  public sensors: AudioSensor;
+  constructor(private tokenStorage: TokenStorageService, private router: Router, private ws: WebSocketService) {}
 
   ngAfterViewInit(): void {
     if (this.tokenStorage.getToken()) {
       this.authority = this.tokenStorage.getAuthorities()[0];
-      if (!this.authority) {
-        if (this.authority === 'ROLE_USER') {
-        }
-      }
+      this.ws._toDictionary('events',false,(response)=>{
+        this.events.next(response);
+      });
+      this.ws._toDictionary('sensors',false,(response)=>{
+        this.sensors = response;
+      });
     }
     else {
       this.router.navigate(['']);
