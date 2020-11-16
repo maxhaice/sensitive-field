@@ -3,8 +3,10 @@
   width: 200px;
   height: 100%;
   overflow: hidden;
+  display: grid;
+  grid-auto-flow: row;
 }
-.events{
+.cont{
   margin: 4px 4px 4px 4px;
   box-shadow: 2px 2px 2px rgb(0,0,0,0.6),
               -2px -2px 2px rgb(0,0,0,0.6);
