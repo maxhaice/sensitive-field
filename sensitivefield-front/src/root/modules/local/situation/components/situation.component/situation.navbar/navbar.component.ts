@@ -14,7 +14,6 @@ export class SituationNavbarComponent implements OnInit{
   events: AudioEvent[] = [];
    constructor(private as: ApiService){}
   ngOnInit(): void {
-    this.events = this.as.getEvents(new Date().toString(),new Date().toString()).events;
   }
   sidebar(){
     this.side.toggle();

@@ -12,11 +12,8 @@ import { ApiService } from 'src/root/services/data-transfer/api/api.service';
 })
 export class SituationSideBarComponent implements OnInit{
   events: AudioEvent[] = [];
-  sensors: AudioSensor[] = [];
-   constructor(private as: ApiService){}
-  ngOnInit(): void {
-    //TODO: events will be in real time!!
-    // this.events = this.as._es.events;
-    // this.sensors = this.as.getSensors().sensors;
-  }
+  constructor(private as: ApiService){}
+ ngOnInit(): void {
+   this.events = this.as.getEvents(new Date().toString(),new Date().toString()).events;
+ }
 }
