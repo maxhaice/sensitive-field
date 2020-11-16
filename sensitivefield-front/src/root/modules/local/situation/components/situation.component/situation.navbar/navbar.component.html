@@ -1,0 +1,30 @@
+<div class="horizontal-bar">
+  <mat-button-toggle-group appearance="legacy" name="navbar" [value]="'sensor'" vertical>
+    <mat-button-toggle value="event">
+      <mat-icon style="
+      height:22px !important;
+      width:22px !important;
+      font-size:22px !important;
+      transition: 400ms;
+      margin-left: -13px;
+      margin-top: -5px;
+    " class="i_navig">new_releases</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="sensor">
+      <mat-icon style="
+      height:22px !important;
+      width:22px !important;
+      font-size:22px !important;
+      transition: 400ms;
+      margin-left: -13px;
+      margin-top: -5px;
+    ">surround_sound</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <div *ngIf="false" class="content">
+    <div class="content">
+    </div>
+  </div>
+  <time-line [input]="audioEvents">
+  </time-line>
+</div>
