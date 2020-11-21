@@ -59,17 +59,18 @@ public class CommandLineApp implements Callable<Integer> {
     }
 
     private void initEventGenerator() {
-        if (isVerbose)
+        if (isVerbose) {
             Configurator.setAllLevels(LogManager.getRootLogger().getName(), Level.DEBUG);
+        }
 
         if (!new ApiService().isBackendRun()) {
             logger.error("Can`t connect to backend, connection refused.");
             return;
         }
 
-        if (isPrettyJson)
+        if (isPrettyJson) {
             AudioEventSerializer.enablePrettyJson();
-
+        }
 
         logger.debug("Entering application..");
         logger.debug("Building audio event generator..");
@@ -99,7 +100,7 @@ public class CommandLineApp implements Callable<Integer> {
                 .forEach(System.out::println);
     }
 
-    private void clear(){
+    private void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }

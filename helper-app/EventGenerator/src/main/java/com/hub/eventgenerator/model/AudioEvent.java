@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Audio event model that used in SensitiveField project.
  */
 public class AudioEvent {
-    private int sensorId;
     private final String dateReal;
+    private int sensorId;
     private Coordinates sensorCoordinates;
     private Source source;
 

@@ -55,11 +55,11 @@ public class AudioEventSerializer {
         objectMapper.registerModule(module);
     }
 
-    public String serialize(AudioEvent audioEvent) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(audioEvent);
-    }
-
     public static void enablePrettyJson() {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
+    public String serialize(AudioEvent audioEvent) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(audioEvent);
     }
 }
