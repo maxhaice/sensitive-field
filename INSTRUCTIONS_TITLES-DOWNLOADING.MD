@@ -23,7 +23,7 @@ Follow the (link)[http://openmap-java.org/] and  install the required software.
 3.  Change the atlas format to Osmodroid ZIP in the menu.
 4.  Click create atlas.
 5.  Find your titles in the downloads folder specified in the Mobile Atlas Creator settings.
-### 4. Have a nice day!WebSecurityConfig).
+### 4. Have a nice day!.
 
 ## License
 Copyright (c) 2020-2020 SmartHub, Inc.
