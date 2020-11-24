@@ -16,11 +16,11 @@ export class SituationSideBarComponent implements OnInit{
   private currentPageSensors: number = 1;
   constructor(private as: ApiService){}
  ngOnInit(): void {
-   this.sensors = this.as.getSensorsByPage(this.currentPageSensors)?.sensors;
+   this.as.getSensorsByPage(this.currentPageSensors)?.subscribe(allSensors=> this.sensors = allSensors.data);
  }
  scrollSensors(scroll: any): void {
   if (scroll.target.offsetHeight + scroll.target.scrollTop >= scroll.target.scrollHeight) {
-      this.as.getSensorsByPage(++this.currentPageSensors)?.sensors.forEach(x=>this.sensors.push(x));
+      this.as.getSensorsByPage(++this.currentPageSensors)?.subscribe(newSensors=>newSensors.data.forEach(value=>this.sensors.push(value)))
   }
  }
 }

@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
 import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
+import { NEW_EVENTS, SENSORS } from 'src/root/services/data-transfer/api/subscribers/subscribe-const/const.subscribe';
 import { WebSocketService } from 'src/root/services/data-transfer/websocket/websocket.service';
 import { TokenStorageService } from 'src/root/services/local-storage/token.storage.service';
 @Component({
@@ -19,10 +20,10 @@ export class SituationComponent implements AfterViewInit{
   ngAfterViewInit(): void {
     if (this.tokenStorage.getToken()) {
       this.authority = this.tokenStorage.getAuthorities()[0];
-      this.ws._toDictionary('events',false,(response)=>{
+      this.ws._toDictionary(NEW_EVENTS,false,(response)=>{
         this.events.next(response);
       });
-      this.ws._toDictionary('sensors',false,(response)=>{
+      this.ws._toDictionary(SENSORS,false,(response)=>{
         this.sensors = response;
       });
     }

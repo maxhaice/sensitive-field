@@ -1,44 +1,37 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
+import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
 import { HTTPService } from '../http/http.service';
 import { WebSocketService } from '../websocket/websocket.service';
-import { EventSystem } from './interfaces/eventsystem.interface';
-import { SensorSystem } from './interfaces/sensor.system.interface';
+import { DTO } from './interfaces/dto.interface';
+import { PageDTO } from './interfaces/page-dto.interface';
+import { EVENTS, NEW_EVENTS, SENSORS } from './subscribers/subscribe-const/const.subscribe';
+import { Subscriber } from './subscribers/subscriber.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService{
-    constructor(private _ws: WebSocketService, private _http: HTTPService){
+    private audioEventsDTO: DTO<AudioEvent>;
+    constructor(private _ws: WebSocketService, private _sb: Subscriber){
         this.tieEventsInTouch();
     }
-    public _es: EventSystem;
-    public _ss: SensorSystem;
-    private tieEventsInTouch(): EventSystem {
-        this._ws._toDictionary("/topic/new-event",false,(value)=>{
-            this._es.eventOnTouch.push(value);
+    private tieEventsInTouch(): DTO<AudioEvent> {
+        this._ws._toDictionary(NEW_EVENTS,false,(value)=>{
+            this.audioEventsDTO.newValues.push(value);
+            this.audioEventsDTO.allValues.push(value);
         });
-        return this._es;
+        return this.audioEventsDTO;
     }
-    public getEvents(dateStart: string, dateEnd: string): EventSystem{
-        this._http.get<AudioEvent[]>('http://localhost:8080/api/history?date=' + dateStart).subscribe(done => {
-                  this._es.events = done;
-                }, er => {
-                });
-        return this._es;
+    public getEvents(dateStart: string, dateEnd: string): Observable<AudioEvent[]>{
+       return this._sb.subscribe<AudioEvent[]>(EVENTS + '?date=' + dateStart);
     }
-    public getSensors(): SensorSystem{
-        this._http.get<AudioEvent[]>('/sensors').subscribe(done => {
-                  this._ss.sensors = done;
-                }, er => {
-                });
-        return this._ss;
+    public getSensors(): Observable<AudioSensor[]>{
+       return this._sb.subscribe<AudioSensor[]>(SENSORS);
     }
-    public getSensorsByPage(page: number): SensorSystem {
-        this._http.get<any>('/page/' + page).subscribe(done => {
-            this._ss.sensors = done.audioSensors;
-          }, er => {
-          });
-        return this._ss;
+    public getSensorsByPage(page: number): Observable<PageDTO<AudioSensor[]>> {
+        return this._sb.subscribe<PageDTO<AudioSensor[]>>(SENSORS+'/page/'+page);
+
     }
 }
