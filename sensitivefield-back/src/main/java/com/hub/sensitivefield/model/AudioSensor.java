@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,9 @@ public class AudioSensor {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "time_stamp")
+    private LocalDateTime timeStamp;
 
     @OneToMany(mappedBy = "audioSensor", cascade = CascadeType.ALL)
     private List<AudioEvent> audioEvents;

@@ -2,17 +2,26 @@ package com.hub.sensitivefield.controller;
 
 import com.hub.sensitivefield.dto.AudioSensorDTO;
 import com.hub.sensitivefield.dto.newDTO.NewAudioSensorDTO;
+import com.hub.sensitivefield.messages.AudioSensorPaginateDTOs;
 import com.hub.sensitivefield.model.AudioSensor;
+import com.hub.sensitivefield.repository.AudioSensorRepository;
 import com.hub.sensitivefield.service.AudioSensorService;
 import com.hub.sensitivefield.service.SituationWebSocketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -23,18 +32,68 @@ public class AudioSensorController {
 
     private final AudioSensorService audioSensorService;
 
+    private final AudioSensorRepository audioSensorRepository;
+
     private final SituationWebSocketService situationWebSocketService;
 
     @Autowired
-    public AudioSensorController(AudioSensorService audioSensorService, SituationWebSocketService situationWebSocketService) {
+    public AudioSensorController(AudioSensorService audioSensorService,
+                                 SituationWebSocketService situationWebSocketService,
+                                 AudioSensorRepository audioSensorRepository) {
         this.audioSensorService = audioSensorService;
+        this.audioSensorRepository = audioSensorRepository;
         this.situationWebSocketService = situationWebSocketService;
     }
 
     @GetMapping("/")
-    private ResponseEntity<List<AudioSensorDTO>> getAllAudioSensors() {
-        logger.info("Audio Sensor was SEND");
-        return ResponseEntity.ok(audioSensorService.getAllAudioSensors());
+    private ResponseEntity<AudioSensorPaginateDTOs> getFilteredAudioSensors(@RequestParam int page,
+                                                                             @RequestParam int pageSize,
+                                                                             @RequestParam(required = false) LocalDateTime dateAfter,
+                                                                             @RequestParam(required = false) LocalDateTime dateBefore,
+                                                                             @RequestParam(required = false) String sortBy,
+                                                                             @RequestParam(required = false) boolean isDescending,
+                                                                             @RequestParam(required = false) String name
+    ) {
+        if (pageSize == 0) {
+            pageSize = 10;//default PAGE SIZE
+        }
+        List<AudioSensor> allAudioSensors = audioSensorService.getAllAudioSensorEntity();
+
+        int totalPages = (allAudioSensors.size() % pageSize != 0)
+                ? allAudioSensors.size() % pageSize + 1
+                : allAudioSensors.size() / pageSize;
+
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+
+        List<AudioSensor> audioSensors;
+
+        audioSensors = audioSensorService.getFilteredAudioSensors(dateAfter, dateBefore, name);
+
+        if (sortBy != null) {
+                audioSensors = switch (sortBy) {//sort, default ascending
+                    case "date":
+                        yield audioSensorService.findAllPageableAndSort(Sort.by("timeStamp"), pageable);
+                    case "name":
+                        yield audioSensorService.findAllPageableAndSort(Sort.by("name"), pageable);
+                    case "lat":
+                        yield audioSensorService.findAllPageableAndSort(Sort.by("latitude"), pageable);
+                    case "lon":
+                        yield audioSensorService.findAllPageableAndSort(Sort.by("longitude"), pageable);
+                    default:
+                        logger.warn("This value of sort is absent - " + sortBy);
+                        throw new IllegalStateException("Unexpected value: " + sortBy);
+                };
+            if(isDescending){//to descending
+                Collections.reverse(audioSensors);
+            }
+        }
+
+        List<AudioSensorDTO> audioSensorDTOS = audioSensors.stream()
+                .map(audioSensorService::convertToDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(new AudioSensorPaginateDTOs(audioSensorDTOS, totalPages));
     }
 
     @GetMapping("/id/{id}")
