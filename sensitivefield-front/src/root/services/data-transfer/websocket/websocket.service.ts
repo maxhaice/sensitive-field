@@ -1,60 +1,37 @@
 import { Injectable } from '@angular/core';
+import { RxStomp } from '@stomp/rx-stomp/esm6/rx-stomp';
 
-import { Stomp } from '@stomp/stompjs';
-import * as SockJS from 'sockjs-client';
-import { DataTransferDictionaryItem } from './interfaces/dictionary.interface';
+import { Observable } from 'rxjs';
+import { TokenStorageService } from '../../local-storage/token.storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
-  private CONNECT_URL = 'http://localhost:8080/connect';
+  private brokerURL = 'ws://localhost:8080/connect';
 
-  private _WS = new SockJS(this.CONNECT_URL);
-  private _client = Stomp.over(this._WS);
-
-  private _dictionary: DataTransferDictionaryItem[] = [];
+  private rxStomp: RxStomp;
   
-  constructor(){
-    this._connect();
-  }
-  public _toDictionary(url: string, isSession: boolean, fun: Function): any{
-    this._dictionary.push({
-        url: url,
-        isSession: isSession,
-        fun: fun
-    });
-    this._reconnect();
-  }
-  private _connect(): void {
-    this._client.connect({}, () => {
-      const sessionId = /\/([^\/]+)\/websocket/?.exec(this._WS?._transport?.url)[1];
-        if ( this._dictionary.length>0 ){
-            this._dictionary.forEach(item=>{
-                this._client.subscribe(item.url+(item.isSession?sessionId:''),item.fun());
-            });
-        }
-    }, this._errorCallBack);
-  }
-  private _reconnect(): void{
-      if (this._disconnect()) return;
-        this._connect();
-  }
-  private _disconnect(): boolean {
-    if (this._client !== null){
-      this._client.disconnect();
-      return true;
+  constructor(private _ts: TokenStorageService){
+    if(this._ts.getToken()){
+      this.rxStomp = new RxStomp();
+      this.rxStomp.configure({
+         brokerURL: this.brokerURL,
+         connectHeaders: {
+         login: this._ts.getUsername(),
+         passcode: '//password'
+         },
+         heartbeatIncoming: 0,
+         heartbeatOutgoing: 20000,
+         reconnectDelay: 10000,
+         debug: ()=>{
+           //TODO: FireAlert
+         }
+        });
+      this.rxStomp.activate();
     }
-    return false; 
   }
-
-  private _errorCallBack(): void {
-    setTimeout(() => {
-      try{
-        this._connect();
-      }
-      catch{
-      }
-    }, 5000);
+  public tie(type: string): Observable<any> {
+    return this.rxStomp.watch(type);
   }
 }
