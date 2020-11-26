@@ -5,20 +5,22 @@ import { BehaviorSubject } from 'rxjs';
 import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
 import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
 import { Leaflet } from 'src/root/modules/public/map/services/leaflet.service';
-import { NEW_EVENTS, SENSORS } from 'src/root/services/data-transfer/api/subscribers/subscribe-const/const.subscribe';
-import { WebSocketService } from 'src/root/services/data-transfer/websocket/websocket.service';
+import { ApiService } from 'src/root/services/data-transfer/api/api.service';
 import { TokenStorageService } from 'src/root/services/local-storage/token.storage.service';
+
 @Component({
   selector: 'situation',
   templateUrl: 'situation.component.html',
   styleUrls: ['situation.component.css']
 })
 export class SituationComponent implements AfterViewInit, OnInit{
-  public authority: string;
+  public authority: string = '';
   public events: BehaviorSubject<AudioEvent[]> = new BehaviorSubject<AudioEvent[]>(null);
-  public sensors: AudioSensor[];
+  public sensors: AudioSensor[] = [];
   public center: BehaviorSubject<LatLng> = new BehaviorSubject<LatLng>(new Leaflet.LatLng(0.0,0.0));
-  constructor(private tokenStorage: TokenStorageService, private router: ActivatedRoute, private route: Router, private ws: WebSocketService) {}
+
+  constructor(private tokenStorage: TokenStorageService, private router: ActivatedRoute, private route: Router, private as: ApiService) {}
+
   ngOnInit(): void {
     this.router.params.subscribe((params: Params) => {
       if (!params['lat']||!params['lon']) return;
@@ -29,11 +31,11 @@ export class SituationComponent implements AfterViewInit, OnInit{
   ngAfterViewInit(): void {
     if (this.tokenStorage.getToken()) {
       this.authority = this.tokenStorage.getAuthorities()[0];
-      this.ws._toDictionary(NEW_EVENTS,false,(response)=>{
-        this.events.next(response);
+      this.as.tieAudioEvents().subscribe((response)=>{
+        this.events.next(response.values);
       });
-      this.ws._toDictionary(SENSORS,false,(response)=>{
-        this.sensors = response;
+      this.as.getAudioSensors().subscribe((response)=>{
+        this.sensors = response.data;
       });
     }
     else {
