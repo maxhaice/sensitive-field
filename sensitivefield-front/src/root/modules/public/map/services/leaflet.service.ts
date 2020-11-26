@@ -1,10 +1,11 @@
 import {Injectable } from '@angular/core';
 
 import * as Leaflet from 'leaflet';
+import { LatLng } from 'leaflet';
 import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
 import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
 import { ApiService } from 'src/root/services/data-transfer/api/api.service';
-
+export { Leaflet };
 
 @Injectable({
     providedIn: 'root'
@@ -21,9 +22,9 @@ export class LeafletService {
     public _map(){
         
     }
-    public _init(map: any): any{
+    public _init(map: any, center: LatLng): any{
           map = Leaflet.map('map', {
-            center: [ 50.450001, 30.523333 ],
+            center: [ center.lat, center.lng ],
             zoom: 15});
         Leaflet.tileLayer('assets/tiles/{z}/{x}/{y}.png', {
             maxZoom: 15,
@@ -35,7 +36,7 @@ export class LeafletService {
     }
 
     public _updateSensors(sensors: AudioSensor[]){
-        sensors.forEach((sensor)=>{
+        sensors?.forEach((sensor)=>{
             Leaflet.marker([sensor.latitude, sensor.longitude], {
                 icon: Leaflet.icon(
                   {iconUrl: this._activeSensorImage,
@@ -47,7 +48,7 @@ export class LeafletService {
         });
     }
     public  _updateEvents(events: AudioEvent[]){
-        events.forEach((event)=>{
+        events?.forEach((event)=>{
             // TODO: categories? that is it? and how it work.
             this._center(new Leaflet.LatLng(event.latitude,event.longitude));
             let mark = Leaflet.marker([event.latitude, event.longitude], {
@@ -71,7 +72,7 @@ export class LeafletService {
             }, 10000);
         });
     }
-    private _center(latlng: Leaflet.LatLngExpression){
-        this.map.panTo(latlng);
+    public _center(latlng: Leaflet.LatLngExpression){
+        this.map?.panTo(latlng);
     }
 }
