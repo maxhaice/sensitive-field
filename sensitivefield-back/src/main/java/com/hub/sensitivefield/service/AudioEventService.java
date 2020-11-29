@@ -13,10 +13,15 @@ import com.hub.sensitivefield.repository.AudioSensorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -55,7 +60,7 @@ public class AudioEventService {
         return audioEventRepository.findAll();
     }
 
-    public boolean saveAudioEvent(NewAudioEventDTO newAudioEventDTO) {
+    public void saveAudioEvent(NewAudioEventDTO newAudioEventDTO) {
         Optional<AudioSensor> audioSensor = audioSensorRepository.findById(newAudioEventDTO.getSensorId());
         if(audioSensor.isEmpty()){
             Latitude latitude = new Latitude(newAudioEventDTO.getSensorCoordinates()
@@ -66,7 +71,7 @@ public class AudioEventService {
             audioSensorRepository.save(new AudioSensor(
                     id,
                     latitude,
-                    longitude));
+                    longitude, LocalDateTime.now()));
         }
         AudioEvent audioEvent = convertFromDTO(newAudioEventDTO);
         audioEventRepository.save(audioEvent);
@@ -76,8 +81,6 @@ public class AudioEventService {
         jsonEvent.setDeleted(false);
         AudioEventDTO audioEventDTO = convertToDTO(jsonEvent);
         situationWebSocketService.sendNewEvent(audioEventDTO);
-
-        return audioSensor.isPresent();
     }
 
     public boolean hideAudioEvent(int id) {
@@ -162,7 +165,7 @@ public class AudioEventService {
                 typeEventService.saveTypeEvent("default");
                 kindEventService.saveKindEvent(new NewKindEventDTO(typeSource1, "default", PriorityEvent.Default));
                 //its okey because this kind has been already added to db
-                kindEvent = kindEventService.getByName("default").get();
+                kindEvent = kindEventService.getByName(typeSource1).get();
                 logger.warn("default value was add to db kindEvent with name=default");
             }
         }
@@ -204,5 +207,97 @@ public class AudioEventService {
                 audioEvent.isDeleted(),
                 audioEvent.getKindEvent()
         );
+    }
+
+    public Page<AudioEvent> getFilteredSortedPageableAudioEvents(
+            LocalDateTime dateAfter,
+            LocalDateTime dateBefore,
+            Integer id,
+            String typeEventName,
+            String priority,
+            String sortBy, boolean isDescending,
+            int page, int pageSize) {
+        if (sortBy != null) {
+            sortBy = switch (sortBy) {//sort, default ascending
+                case "date":
+                    yield "dateReal";
+                case "lat":
+                    yield "latitude";
+                case "lon":
+                    yield "longitude";
+                default:
+                    throw new IllegalStateException("Unexpected value: " + sortBy);
+            };
+        }
+        else{//default sorting by id
+            sortBy = "id";
+        }
+
+        Pageable pageable;
+        if(isDescending){
+            pageable = PageRequest.of(page, pageSize, Sort.by(sortBy).descending());
+        }
+        else{
+            pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
+        }
+
+        Optional<AudioSensor> audioSensor = audioSensorRepository.findById(Objects.requireNonNullElse(id, -1));
+        if(audioSensor.isEmpty() && typeEventName==null && dateAfter == null && dateBefore == null){
+            return audioEventRepository.findAll(pageable);
+        }
+
+        if(dateAfter==null){
+            dateAfter = LocalDateTime.now().minusYears(2000);
+            System.out.println(dateAfter);
+        }
+        if(dateBefore==null){
+            dateBefore = LocalDateTime.now();
+            System.out.println(dateBefore);
+        }
+
+        if(audioSensor.isPresent()){
+            if(typeEventName==null){
+                if(priority == null){
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndAudioSensorEquals(
+                            dateBefore, dateAfter, audioSensor.get(), pageable);
+                }
+                else{
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndAudioSensorEqualsAndKindEvent_Priority(
+                            dateBefore, dateAfter, audioSensor.get(), priority, pageable);
+                }
+            }
+            else{
+                if(priority == null){
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndAudioSensorEqualsAndKindEvent_TypeEvent_Name(
+                            dateBefore, dateAfter, audioSensor.get(), typeEventName, pageable);
+                }
+                else{
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndAudioSensorEqualsAndKindEvent_TypeEvent_NameAndKindEvent_Priority(
+                            dateBefore, dateAfter, audioSensor.get(), typeEventName, priority, pageable);
+                }
+            }
+        }
+        else{
+            if(typeEventName==null){
+                if(priority == null){
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqual(
+                            dateBefore, dateAfter, pageable);
+                }
+                else{
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndKindEvent_Priority(
+                            dateBefore, dateAfter, priority, pageable);
+                }
+            }
+            else{
+                if(priority == null){
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndKindEvent_TypeEvent_Name(
+                            dateBefore, dateAfter, typeEventName, pageable);
+                }
+                else{
+                    return audioEventRepository.findAllByDateServerLessThanEqualAndDateServerGreaterThanEqualAndKindEvent_TypeEvent_NameAndKindEvent_Priority(
+                            dateBefore, dateAfter, typeEventName, priority, pageable);
+                }
+            }
+        }
     }
 }

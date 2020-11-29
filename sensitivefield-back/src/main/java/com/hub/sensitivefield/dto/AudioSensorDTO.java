@@ -1,14 +1,16 @@
 package com.hub.sensitivefield.dto;
 
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class AudioSensorDTO {
 
-    @Setter
     private int id;
-    @Setter
+
     private double latitude;
-    @Setter
+
     private double longitude;
 
     public AudioSensorDTO(int id, double latitude, double longitude) {

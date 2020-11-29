@@ -3,11 +3,13 @@ package com.hub.sensitivefield.dto.newDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Setter
+@Getter
 public class NewAudioEventDTO {
 
     @JsonProperty("sensor_id")

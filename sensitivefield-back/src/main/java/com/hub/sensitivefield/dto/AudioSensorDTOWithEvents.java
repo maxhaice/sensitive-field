@@ -6,22 +6,18 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class AudioSensorDTOWithEvents {
 
-    @Setter
     private int id;
 
-    @Setter
     private double latitude;
 
-    @Setter
     private double longitude;
 
-    @Setter
     private String name;
 
-    @Setter
-    @Getter
     private List<AudioEventWithoutSensor> audioEventDTOList;
 
     public AudioSensorDTOWithEvents(int id, String name,
