@@ -25,11 +25,6 @@
     position: absolute;
     top: 0%; left: 0%;
     background-color: transparent;
-    /* display: grid;
-		grid-template-areas:"navbar router content";
-		grid-template-rows: 100%;
-		/* grid-template-columns: 83px .001% 95.999%; */
-    /* grid-template-columns: .001% auto 70px;  */
     width: 100%; height: 100%;
 }
 .navbar{
@@ -44,8 +39,8 @@
 }
 router-outlet{
    background-color: var(--background-color);
- }
- @media (max-width: 1111px) {
+}
+@media (max-width: 1111px) {
   .main-grid{
 		grid-template-columns: 83px .001% 95.999%;
   }

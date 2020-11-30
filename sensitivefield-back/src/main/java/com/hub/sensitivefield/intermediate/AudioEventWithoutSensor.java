@@ -30,7 +30,6 @@ public class AudioEventWithoutSensor {
 
         private final boolean isDeleted;
 
-        @Getter
         private final String kindEvent;
 
 

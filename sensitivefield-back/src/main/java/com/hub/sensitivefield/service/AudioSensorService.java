@@ -83,7 +83,7 @@ public class AudioSensorService {
 
     public AudioSensorDTO convertToDTO(AudioSensor audioSensor) {
         return new AudioSensorDTO(audioSensor.getId(), audioSensor.getLatitude()
-                , audioSensor.getLongitude());
+                , audioSensor.getLongitude(), audioSensor.getDateTime());
     }
 
     public AudioSensorDTOWithEvents convertToDTOwithEvents(AudioSensor audioSensor) {
@@ -94,7 +94,8 @@ public class AudioSensorService {
                 audioSensor.getAudioEvents()
                         .stream()
                         .map(AudioEventService::convertToDTOWithoutEvents)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList()),
+                audioSensor.getDateTime());
     }
 
     public AudioSensor convertFromDTO(NewAudioSensorDTO newAudioSensorDTO) {
