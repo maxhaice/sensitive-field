@@ -15,6 +15,7 @@ export class RootComponent{
     this.router.events.pipe(filter(event => event instanceof NavigationStart)).subscribe(value=>{
       this.hide = (value as NavigationStart).url == '/situation' 
                   || (value as NavigationStart).url == '/statistic'
+                  || (value as NavigationStart).url.split(';')[0] == '/situation'
                   || (value as NavigationStart).url == '/history'
                   || (value as NavigationStart).url == '/sensors'
                   || (value as NavigationStart).url == '/settings';
