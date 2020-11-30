@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AudioEvent } from 'src/root/interfaces/audio-event.interface';
 import { AudioSensor } from 'src/root/interfaces/audio-sensor.interface';
-import { HTTPService } from '../http/http.service';
-import { WebSocketService } from '../websocket/websocket.service';
 import { DTO } from './interfaces/dto.interface';
 import { PageDTO } from './interfaces/page-dto.interface';
 import { EVENTS, NEW_EVENTS, SENSORS } from './subscribers/subscribe-const/const.subscribe';
 import { ApiSubscriber } from './subscribers/subscriber.api.service';
 import { WebSocketSubscriber } from './subscribers/subscriber.websocket.service';
-
 @Injectable({
     providedIn: 'root'
 })

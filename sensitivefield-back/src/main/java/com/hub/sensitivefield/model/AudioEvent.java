@@ -30,10 +30,10 @@ public class AudioEvent {
     @Column(name = "longitude")
     private double longitude;
 
-    @Column(name = "date_of_come")
+    @Column(name = "date_of_come", length = 0)
     private LocalDateTime dateServer;
 
-    @Column(name = "date_origin")
+    @Column(name = "date_origin", length = 0)
     private LocalDateTime dateReal;
 
     @Column(name = "source_type1")

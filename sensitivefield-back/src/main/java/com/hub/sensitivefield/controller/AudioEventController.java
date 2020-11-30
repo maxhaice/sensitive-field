@@ -1,15 +1,23 @@
 package com.hub.sensitivefield.controller;
 
 import com.hub.sensitivefield.dto.AudioEventDTO;
+import com.hub.sensitivefield.dto.AudioEventPaginateDTOs;
+import com.hub.sensitivefield.dto.AudioSensorDTO;
 import com.hub.sensitivefield.dto.newDTO.NewAudioEventDTO;
+import com.hub.sensitivefield.messages.AudioSensorPaginateDTOs;
 import com.hub.sensitivefield.model.AudioEvent;
+import com.hub.sensitivefield.model.AudioSensor;
 import com.hub.sensitivefield.service.AudioEventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -29,11 +37,36 @@ public class AudioEventController {
         this.audioEventService = audioEventService;
     }
 
-    @GetMapping("/api/audio-events/")
-    private ResponseEntity<List<AudioEventDTO>> getAllAudioEvents() {
-        logger.info("AudioEvents was send");
-        return ResponseEntity.ok(audioEventService.getAllAudioEvents()
-                .stream().map(AudioEventService::convertToDTO).collect(Collectors.toList()));
+    @GetMapping("/api/audio-events")
+    private ResponseEntity<AudioEventPaginateDTOs> getFilteredAudioSensors(@RequestParam int page,
+                                                                            @RequestParam int pageSize,
+                                                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+                                                                            @RequestParam(required = false)
+                                                                                    LocalDateTime dateAfter,
+                                                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+                                                                            @RequestParam(required = false)
+                                                                                    LocalDateTime dateBefore,
+                                                                            @RequestParam(required = false)
+                                                                            Integer id,
+                                                                            @RequestParam(required = false)
+                                                                            String kindEventName,
+                                                                            @RequestParam(required = false)
+                                                                            String priority,
+                                                                            @RequestParam(required = false) String sortBy,
+                                                                            @RequestParam(required = false) boolean isDescending
+    ) {
+
+        Page<AudioEvent> audioEvents = audioEventService
+                .getFilteredSortedPageableAudioEvents(dateAfter, dateBefore, id, kindEventName, priority, sortBy, isDescending, page, pageSize);
+
+        int totalPages = audioEvents.getTotalPages();
+
+
+        List<AudioEventDTO> audioEventDTOs = audioEvents.stream()
+                .map(AudioEventService::convertToDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(new AudioEventPaginateDTOs(audioEventDTOs, totalPages));
     }
 
     @PutMapping("/api/audio-events/{id}/hide")
@@ -111,16 +144,8 @@ public class AudioEventController {
 
     @PostMapping("/api/audio-events/")
     private ResponseEntity<?> addAudioEvent(@RequestBody NewAudioEventDTO newAudioEventDTO) {
-        System.out.println("WTF1");
-        if (audioEventService.saveAudioEvent(newAudioEventDTO)) {
+            audioEventService.saveAudioEvent(newAudioEventDTO);
             logger.info("AudioEvent was save");
-            System.out.println("wtf2");
-            return ResponseEntity.ok().build();
-        } else {
-            System.out.println("wtf3");
-            logger.info("AudioEvent wasn't save because sensor with id = "
-                    + newAudioEventDTO.getSensorId() + " WASN'T FOUND");
-            return ResponseEntity.ok("New sensor was added");
-        }
+            return ResponseEntity.ok("New audio event was added");
     }
 }

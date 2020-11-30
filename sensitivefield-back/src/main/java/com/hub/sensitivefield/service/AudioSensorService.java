@@ -9,9 +9,17 @@ import com.hub.sensitivefield.valueobjects.Longitude;
 import com.hub.sensitivefield.model.AudioSensor;
 import com.hub.sensitivefield.repository.AudioSensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -94,8 +102,7 @@ public class AudioSensorService {
         ID id = new ID(newAudioSensorDTO.getId());
         Latitude latitude = new Latitude(newAudioSensorDTO.getLatitude());
         Longitude longitude = new Longitude(newAudioSensorDTO.getLongitude());
-        LocalDateTime localDateTime = LocalDateTime.now();
-        return new AudioSensor(id, latitude, longitude, localDateTime);
+        return new AudioSensor(id, latitude, longitude, LocalDateTime.now());
     }
 
     public boolean changeAudioSensorName(int id, String name) {
@@ -108,5 +115,55 @@ public class AudioSensorService {
         audioSensor.setName(name);
         audioSensorRepository.save(audioSensor);
         return true;
+    }
+
+    public Page<AudioSensor> getFilteredSortedPageableAudioSensors(
+                                                    LocalDateTime dateAfter,
+                                                    LocalDateTime dateBefore,
+                                                    String name,
+                                                    String sortBy, boolean isDescending,
+                                                    int page, int pageSize) {
+        if (sortBy != null) {
+            sortBy = switch (sortBy) {//sort, default ascending
+                case "date":
+                    yield "timeStamp";
+                case "name":
+                    yield "name";
+                case "lat":
+                    yield "latitude";
+                case "lon":
+                    yield "longitude";
+                default:
+                    throw new IllegalStateException("Unexpected value: " + sortBy);
+            };
+        }
+        else{//default sorting by id
+            sortBy = "id";
+        }
+
+        Pageable pageable;
+        if(isDescending){
+            pageable = PageRequest.of(page, pageSize, Sort.by(sortBy).descending());
+        }
+        else{
+            pageable = PageRequest.of(page, pageSize, Sort.by(sortBy));
+        }
+
+        if(dateAfter == null && dateBefore == null && name == null){
+            return audioSensorRepository.findAll(pageable);
+        }
+        if(dateAfter == null && dateBefore == null){
+            return audioSensorRepository.findAllByNameIsContaining(name, pageable);
+        }
+        if(dateAfter==null){
+            dateAfter = LocalDateTime.now().minusYears(2000);
+            System.out.println(dateAfter);
+        }
+        if(dateBefore==null){
+            dateBefore = LocalDateTime.now();
+            System.out.println(dateBefore);
+        }
+
+        return audioSensorRepository.findAllByTimeStampLessThanEqualAndTimeStampGreaterThanEqualAndNameIsContaining(dateBefore, dateAfter, name, pageable);
     }
 }
