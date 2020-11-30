@@ -7,6 +7,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.TypeDef;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -33,19 +35,19 @@ public class AudioSensor {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "date")
-    private LocalDateTime dateTime;
+    @Column(name = "time_stamp", length = 0)
+    private LocalDateTime timeStamp;
 
     @OneToMany(mappedBy = "audioSensor", cascade = CascadeType.ALL)
     private List<AudioEvent> audioEvents;
 
-    public AudioSensor(ID id, Latitude latitude, Longitude longitude, LocalDateTime dateTime) {
+    public AudioSensor(ID id, Latitude latitude, Longitude longitude, LocalDateTime timeStamp) {
         this.id = id.getValue();
         this.latitude = latitude.getValue();
         this.longitude = longitude.getValue();
         this.audioEvents = new ArrayList<>();
         this.name = "blank";
-        this.dateTime = dateTime;
+        this.timeStamp = timeStamp;
     }
     public void addAudioEvent(AudioEvent audioEvent) {
         List<AudioEvent> audioEvents = getAudioEvents();

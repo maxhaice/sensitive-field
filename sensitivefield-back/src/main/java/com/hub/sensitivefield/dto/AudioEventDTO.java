@@ -2,10 +2,12 @@ package com.hub.sensitivefield.dto;
 
 import com.hub.sensitivefield.model.KindEvent;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class AudioEventDTO {
 
     private final int id;

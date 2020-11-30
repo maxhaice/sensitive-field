@@ -2,6 +2,7 @@ package com.hub.sensitivefield.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,6 +37,10 @@ public class KindEvent {
         this.name = name;
         this.typeEvent = typeEvent;
         this.audioEventList = new ArrayList<>();
+    }
+
+    public String getTypeEventName() {
+        return typeEvent.getName();
     }
 
     public KindEvent() {

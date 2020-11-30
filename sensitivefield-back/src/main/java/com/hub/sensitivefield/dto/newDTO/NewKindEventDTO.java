@@ -3,8 +3,10 @@ package com.hub.sensitivefield.dto.newDTO;
 
 import com.hub.sensitivefield.model.PriorityEvent;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class NewKindEventDTO {
 
     private final String name;
