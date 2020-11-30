@@ -1,4 +1,3 @@
 export interface DTO<T>{
-    newValues: [T],
-    allValues: [T];
+    values: T[]
 }
