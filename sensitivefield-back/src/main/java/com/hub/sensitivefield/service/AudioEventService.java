@@ -217,7 +217,7 @@ public class AudioEventService {
             String typeEventName,
             String priority,
             String sortBy, boolean isDescending,
-            int page, int pageSize) {
+            Integer page, Integer pageSize) {
         if (sortBy != null) {
             sortBy = switch (sortBy) {//sort, default ascending
                 case "date":

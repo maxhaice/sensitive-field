@@ -46,10 +46,10 @@ public class ApiService {
     public List<String> getAudioEventTypes() {
         List<String> result = new ArrayList<>();
 
-        String json = httpService.get("http://localhost:8080/typeEvents/").body().toString();
+        String json = httpService.get("http://localhost:8080/api/kinds-events/").body().toString();
         try {
             JsonNode node = objectMapper.readTree(json);
-            for (JsonNode subNode : node.get("_embedded").get("typeEvents")) {
+            for (JsonNode subNode : node.get("_embedded").get("kind")) {
                 result.add(subNode.get("name").toString().replace("\"", ""));
             }
         } catch (JsonProcessingException e) {

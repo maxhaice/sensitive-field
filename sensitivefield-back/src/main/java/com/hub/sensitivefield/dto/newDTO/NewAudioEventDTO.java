@@ -15,7 +15,7 @@ public class NewAudioEventDTO {
     @JsonProperty("sensor_id")
     private int sensorId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "date_real", pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateReal;
 
     @JsonProperty("sensor_coordinates")

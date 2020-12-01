@@ -22,7 +22,7 @@ public class TypeEventController {
         this.typeEventService = typeEventService;
     }
 
-    @GetMapping("/api/typesvents")
+    @GetMapping("/api/types-events")
     public ResponseEntity<List<TypeEventDTO>> getAllTypeOfEvents() {
         return ResponseEntity.ok(typeEventService.getAll()
                 .stream()
@@ -30,7 +30,7 @@ public class TypeEventController {
                 .collect(Collectors.toList()));
     }
 
-    @GetMapping("/api/typesvents/{name}/")
+    @GetMapping("/api/types-events/{name}/")
     public ResponseEntity<TypeEvent> getTypeEventByName(@PathVariable String name) {
         Optional<TypeEvent> typeEventOptional = typeEventService.getTypeEventByName(name);
         if (typeEventOptional.isEmpty()) {
@@ -40,7 +40,7 @@ public class TypeEventController {
         }
     }
 
-    @DeleteMapping("/api/typesvents/{id}")
+    @DeleteMapping("/api/types-events/{id}")
     public ResponseEntity<Void> deleteTypeEventById(@PathVariable int id) {
         if (typeEventService.deleteTypeEvent(id)) {
             return ResponseEntity.ok().build();
@@ -49,7 +49,7 @@ public class TypeEventController {
         }
     }
 
-    @PostMapping("/api/typesevents")
+    @PostMapping("/api/types-events")
     public ResponseEntity<Void> saveTypeEvent(@RequestParam String name) {
         typeEventService.saveTypeEvent(name);
         return ResponseEntity.ok().build();
