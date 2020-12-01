@@ -4,7 +4,7 @@ CREATE TABLE `audio_sensor` (
                                 `latitude` double DEFAULT NULL,
                                 `longitude` double DEFAULT NULL,
                                 `name` varchar(255) DEFAULT NULL,
-                                `date` datetime(6) DEFAULT NULL,
+                                `time_stamp` datetime(6) DEFAULT NULL,
                                 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

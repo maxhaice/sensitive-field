@@ -9,10 +9,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "role")
 public class Role {
     @ManyToMany(cascade = CascadeType.ALL)
     List<User> users;

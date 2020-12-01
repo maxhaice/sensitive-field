@@ -1,5 +1,9 @@
 package com.hub.sensitivefield.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,10 +29,12 @@ public class KindEvent {
     @Column(name = "name")
     private String name;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "event_type_id")
+    @JoinColumn(name = "type_event_id")
     private TypeEvent typeEvent;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "kindEvent")
     private List<AudioEvent> audioEventList;
 

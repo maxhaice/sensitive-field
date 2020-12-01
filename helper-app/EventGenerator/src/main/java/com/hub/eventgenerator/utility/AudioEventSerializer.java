@@ -45,7 +45,6 @@ public class AudioEventSerializer {
                     throws IOException {
                 jsonGenerator.writeStartObject();
                 jsonGenerator.writeNumberField("sensor_id", audioEvent.getSensorId());
-                //TODO fix in backend: json node`s field name "dateReal" (dateReal -> date_real)
                 jsonGenerator.writeObjectField("date_real", audioEvent.getDateReal());
                 jsonGenerator.writeObjectField("sensor_coordinates", audioEvent.getSensorCoordinates());
                 jsonGenerator.writeRaw(",\"source\":" + objectMapper.writeValueAsString(audioEvent.getSource()));

@@ -39,14 +39,14 @@ public class AudioSensorService {
     }
 
     public List<AudioSensorDTO> getAllAudioSensors() {
-        return audioSensorRepository.findAll()
+        return audioSensorRepository.findAll(Pageable.unpaged())
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<AudioSensor> getAllAudioSensorEntity() {
-        return audioSensorRepository.findAll();
+        return audioSensorRepository.findAll(Pageable.unpaged()).getContent();
     }
 
     //TODO: future fix
@@ -55,7 +55,7 @@ public class AudioSensorService {
     }
 
     public List<AudioSensor> getSomeAudioSensors(int count) {
-        return audioSensorRepository.findAll().subList(0, count);
+        return audioSensorRepository.findAll(Pageable.unpaged()).getContent().subList(0, count);
     }
 
     public boolean removeAudioSensorById(int id) {

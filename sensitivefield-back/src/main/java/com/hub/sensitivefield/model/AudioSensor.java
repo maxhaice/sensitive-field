@@ -1,5 +1,9 @@
 package com.hub.sensitivefield.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.hub.sensitivefield.valueobjects.ID;
 import com.hub.sensitivefield.valueobjects.Latitude;
 import com.hub.sensitivefield.valueobjects.Longitude;
@@ -38,6 +42,7 @@ public class AudioSensor {
     @Column(name = "time_stamp", length = 0)
     private LocalDateTime timeStamp;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "audioSensor", cascade = CascadeType.ALL)
     private List<AudioEvent> audioEvents;
 

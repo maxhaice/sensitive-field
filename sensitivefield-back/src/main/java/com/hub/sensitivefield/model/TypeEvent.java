@@ -1,5 +1,6 @@
 package com.hub.sensitivefield.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class TypeEvent {
     @Column(name = "name")
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "typeEvent")
     private List<KindEvent> kindEvent;
 }
