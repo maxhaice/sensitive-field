@@ -1,5 +1,6 @@
 package com.hub.sensitivefield.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hub.sensitivefield.valueobjects.ID;
 import com.hub.sensitivefield.valueobjects.Latitude;
 import com.hub.sensitivefield.valueobjects.Longitude;
@@ -7,11 +8,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.TypeDef;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +36,7 @@ public class AudioSensor {
     @Column(name = "time_stamp", length = 0)
     private LocalDateTime timeStamp;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "audioSensor", cascade = CascadeType.ALL)
     private List<AudioEvent> audioEvents;
 

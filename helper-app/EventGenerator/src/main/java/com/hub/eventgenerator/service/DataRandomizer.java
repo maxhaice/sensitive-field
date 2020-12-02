@@ -14,14 +14,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class DataRandomizer {
     private final ApiService apiService;
-    private List<String> typesNames;
+    private List<String> kindsNames;
     private List<Integer> availableSensors;
 
     public DataRandomizer() {
         apiService = new ApiService();
-        typesNames = new ArrayList<>();
+        kindsNames = new ArrayList<>();
         availableSensors = new ArrayList<>();
-
     }
 
     public int getRandomSensorId() {
@@ -44,7 +43,7 @@ public class DataRandomizer {
     }
 
     public Source getRandomSource(Coordinates sensorCoordinates) {
-        typesNames = apiService.getAudioEventTypes();
+        kindsNames = apiService.getAudioEventKinds();
         List<Source.PotentialType> potentialSourceTypeList = new ArrayList<>();
 
         double[] probabilities = new double[3];
@@ -53,8 +52,8 @@ public class DataRandomizer {
         probabilities[2] = 100 - probabilities[0] - probabilities[1];
 
         for (int i = 0; i < 3; i++) {
-            String randTypeName = typesNames.get(ThreadLocalRandom.current().nextInt(typesNames.size()));
-            typesNames.remove(randTypeName);
+            String randTypeName = kindsNames.get(ThreadLocalRandom.current().nextInt(kindsNames.size()));
+            kindsNames.remove(randTypeName);
 
             probabilities[i] = BigDecimal.valueOf(probabilities[i])
                     .setScale(3, RoundingMode.HALF_EVEN)

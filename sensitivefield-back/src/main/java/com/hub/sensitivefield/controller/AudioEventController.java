@@ -38,8 +38,8 @@ public class AudioEventController {
     }
 
     @GetMapping("/api/audio-events")
-    private ResponseEntity<AudioEventPaginateDTOs> getFilteredAudioSensors(@RequestParam int page,
-                                                                            @RequestParam int pageSize,
+    private ResponseEntity<?> getFilteredAudioSensors(@RequestParam(required = false) Integer page,
+                                                                            @RequestParam(required = false) Integer pageSize,
                                                                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
                                                                             @RequestParam(required = false)
                                                                                     LocalDateTime dateAfter,
@@ -55,7 +55,9 @@ public class AudioEventController {
                                                                             @RequestParam(required = false) String sortBy,
                                                                             @RequestParam(required = false) boolean isDescending
     ) {
-
+        if(page==null && pageSize==null){
+            return ResponseEntity.ok(audioEventService.getAllAudioEvents());
+        }
         Page<AudioEvent> audioEvents = audioEventService
                 .getFilteredSortedPageableAudioEvents(dateAfter, dateBefore, id, kindEventName, priority, sortBy, isDescending, page, pageSize);
 

@@ -20,7 +20,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = {
                 "login"
         })
-})
+}, name = "user")
 public class User {
 
     @Id

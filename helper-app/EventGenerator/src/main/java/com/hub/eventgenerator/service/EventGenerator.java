@@ -28,7 +28,7 @@ public class EventGenerator {
         apiService = new ApiService();
         scheduledExecutorService = Executors.newScheduledThreadPool(4);
         randDelayLeftBound = 5;
-        randDelayRightBound = 60;
+        randDelayRightBound = 20;
     }
 
     public static Builder builder() {

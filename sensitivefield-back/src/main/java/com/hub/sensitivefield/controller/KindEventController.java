@@ -23,7 +23,7 @@ public class KindEventController {
         this.kindEventService = kindEventService;
     }
 
-    @GetMapping("/api/kindsevenets")
+    @GetMapping("/api/kinds-events")
     public ResponseEntity<List<KindEventDTO>> getAllKindEvents() {
         return ResponseEntity.ok(kindEventService.getAll()
                 .stream()
@@ -31,7 +31,7 @@ public class KindEventController {
                 .collect(Collectors.toList()));
     }
 
-    @DeleteMapping("/api/kindsevenets/{id}/delete")
+    @DeleteMapping("/api/kinds-events/{id}/delete")
     public ResponseEntity<Void> deleteKindEvent(@PathVariable int id) {
         if (kindEventService.deleteById(id)) {
             return ResponseEntity.ok().build();
@@ -40,7 +40,7 @@ public class KindEventController {
         }
     }
 
-    @GetMapping("/api/kindsevenets/{name}")
+    @GetMapping("/api/kinds-events/{name}")
     public ResponseEntity<KindEventDTO> getKindEventByName(@PathVariable String name) {
         Optional<KindEvent> optionalKindEvent = kindEventService.getByName(name);
         if (optionalKindEvent.isEmpty()) {
@@ -50,7 +50,7 @@ public class KindEventController {
         }
     }
 
-    @PostMapping("/api/kindsevents")
+    @PostMapping("/api/kinds-events")
     public ResponseEntity<Void> saveKindEvents(@RequestBody NewKindEventDTO newKindEventDTO){
         if(kindEventService.saveKindEvent(newKindEventDTO)){
             return ResponseEntity.ok().build();

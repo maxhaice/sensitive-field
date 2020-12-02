@@ -43,20 +43,20 @@ public class ApiService {
         logger.debug("Response HTTP status code: [" + response.statusCode() + "].");
     }
 
-    public List<String> getAudioEventTypes() {
+    public List<String> getAudioEventKinds() {
         List<String> result = new ArrayList<>();
 
-        String json = httpService.get("http://localhost:8080/typeEvents/").body().toString();
+        String json = httpService.get("http://localhost:8080/api/kinds-events/").body().toString();
         try {
             JsonNode node = objectMapper.readTree(json);
-            for (JsonNode subNode : node.get("_embedded").get("typeEvents")) {
+            for (JsonNode subNode : node) {
                 result.add(subNode.get("name").toString().replace("\"", ""));
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        logger.debug("List of available event types: [" + String.join(", ", result) + "].");
+        logger.debug("List of available event kinds: [" + String.join(", ", result) + "].");
         return result;
     }
 

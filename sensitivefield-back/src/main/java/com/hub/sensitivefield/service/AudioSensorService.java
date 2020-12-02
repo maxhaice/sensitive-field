@@ -39,14 +39,14 @@ public class AudioSensorService {
     }
 
     public List<AudioSensorDTO> getAllAudioSensors() {
-        return audioSensorRepository.findAll()
+        return audioSensorRepository.findAll(Pageable.unpaged())
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<AudioSensor> getAllAudioSensorEntity() {
-        return audioSensorRepository.findAll();
+        return audioSensorRepository.findAll(Pageable.unpaged()).getContent();
     }
 
     //TODO: future fix
@@ -55,7 +55,7 @@ public class AudioSensorService {
     }
 
     public List<AudioSensor> getSomeAudioSensors(int count) {
-        return audioSensorRepository.findAll().subList(0, count);
+        return audioSensorRepository.findAll(Pageable.unpaged()).getContent().subList(0, count);
     }
 
     public boolean removeAudioSensorById(int id) {
@@ -83,7 +83,7 @@ public class AudioSensorService {
 
     public AudioSensorDTO convertToDTO(AudioSensor audioSensor) {
         return new AudioSensorDTO(audioSensor.getId(), audioSensor.getLatitude()
-                , audioSensor.getLongitude(), audioSensor.getDateTime());
+                , audioSensor.getLongitude(), audioSensor.getTimeStamp());
     }
 
     public AudioSensorDTOWithEvents convertToDTOwithEvents(AudioSensor audioSensor) {
@@ -95,7 +95,7 @@ public class AudioSensorService {
                         .stream()
                         .map(AudioEventService::convertToDTOWithoutEvents)
                         .collect(Collectors.toList()),
-                audioSensor.getDateTime());
+                audioSensor.getTimeStamp());
     }
 
     public AudioSensor convertFromDTO(NewAudioSensorDTO newAudioSensorDTO) {
@@ -122,7 +122,7 @@ public class AudioSensorService {
                                                     LocalDateTime dateBefore,
                                                     String name,
                                                     String sortBy, boolean isDescending,
-                                                    int page, int pageSize) {
+                                                    Integer page, Integer pageSize) {
         if (sortBy != null) {
             sortBy = switch (sortBy) {//sort, default ascending
                 case "date":

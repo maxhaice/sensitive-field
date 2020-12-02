@@ -1,6 +1,7 @@
 package com.hub.sensitivefield.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "audio_event")
 public class AudioEvent {
 
     @Id
@@ -20,6 +22,7 @@ public class AudioEvent {
     @Column(name = "id")
     private int id;
 
+    @JsonManagedReference
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "audio_sensor_id", nullable = false)
     private AudioSensor audioSensor;
@@ -57,6 +60,7 @@ public class AudioEvent {
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_kind_id", nullable = false)
     private KindEvent kindEvent;
