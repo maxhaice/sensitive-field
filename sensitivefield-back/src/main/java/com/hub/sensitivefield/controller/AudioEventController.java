@@ -144,7 +144,7 @@ public class AudioEventController {
                 .stream().map(AudioEventService::convertToDTO).collect(Collectors.toList()));
     }
 
-    @PostMapping("/api/audio-events/")
+    @RequestMapping(value = "/api/audio-events/", method = RequestMethod.POST)
     private ResponseEntity<?> addAudioEvent(@RequestBody NewAudioEventDTO newAudioEventDTO) {
             audioEventService.saveAudioEvent(newAudioEventDTO);
             logger.info("AudioEvent was save");
