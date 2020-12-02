@@ -5,8 +5,8 @@ services:
         image: mysql
         restart: always
         environment:
-            - MYSQL_ROOT_PASSWORD=73MnYG5qaEq
-            - MYSQL_DATABASE=SensitiveField
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=sensitive-field
         volumes:
             - type: bind
               source: ./db-data
