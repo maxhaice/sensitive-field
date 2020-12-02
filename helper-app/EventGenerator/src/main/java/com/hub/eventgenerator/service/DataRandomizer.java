@@ -23,9 +23,13 @@ public class DataRandomizer {
         availableSensors = new ArrayList<>();
     }
 
-    public int getRandomSensorId() {
+    public int getRandomExistingSensorId() {
         availableSensors = apiService.getAvailableAudioSensors();
         return availableSensors.get(ThreadLocalRandom.current().nextInt() % availableSensors.size());
+    }
+
+    public int getRandomSensorId(int bound) {
+        return ThreadLocalRandom.current().nextInt(bound);
     }
 
     public Coordinates getRandomSensorCoordinates() {

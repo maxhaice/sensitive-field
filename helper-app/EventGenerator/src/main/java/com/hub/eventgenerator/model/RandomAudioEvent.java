@@ -7,11 +7,15 @@ import com.hub.eventgenerator.service.DataRandomizer;
  * but fields initialized with random values.
  */
 public class RandomAudioEvent extends AudioEvent {
-    public RandomAudioEvent() {
+    public RandomAudioEvent(boolean isExistingSensor) {
         super();
         DataRandomizer randomizer = new DataRandomizer();
         Coordinates sensorCoordinates = randomizer.getRandomSensorCoordinates();
-        super.setSensorId(randomizer.getRandomSensorId());
+        if (isExistingSensor) {
+            super.setSensorId(randomizer.getRandomExistingSensorId());
+        } else {
+            super.setSensorId(randomizer.getRandomSensorId(100));
+        }
         super.setSensorCoordinates(sensorCoordinates);
         super.setSource(randomizer.getRandomSource(sensorCoordinates));
     }
