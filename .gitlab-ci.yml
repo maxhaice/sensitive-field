@@ -16,7 +16,8 @@ build backend:
     - cd sensitivefield-back/
     - mvn $MAVEN_CLI_OPTS verify  
   only:
-    - feature/gitlab-ci
+    - master
+    - develop
   except:
     changes:
       - "*.md"
@@ -33,7 +34,8 @@ build frontend:
   script:
     - ./node_modules/@angular/cli/bin/ng build --build-optimizer --progress=false
   only:
-    - feature/gitlab-ci
+    - master
+    - develop
   except:
     changes:
       - "*.md"
@@ -48,7 +50,8 @@ build helper-app:
     - cd helper-app/EventGenerator
     - mvn $MAVEN_CLI_OPTS verify
   only:
-    - feature/gitlab-ci
+    - master
+    - develop
   except:
     changes:
       - "*.md"
