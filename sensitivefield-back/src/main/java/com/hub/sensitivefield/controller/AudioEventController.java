@@ -2,11 +2,8 @@ package com.hub.sensitivefield.controller;
 
 import com.hub.sensitivefield.dto.AudioEventDTO;
 import com.hub.sensitivefield.dto.AudioEventPaginateDTOs;
-import com.hub.sensitivefield.dto.AudioSensorDTO;
 import com.hub.sensitivefield.dto.newDTO.NewAudioEventDTO;
-import com.hub.sensitivefield.messages.AudioSensorPaginateDTOs;
 import com.hub.sensitivefield.model.AudioEvent;
-import com.hub.sensitivefield.model.AudioSensor;
 import com.hub.sensitivefield.service.AudioEventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -144,7 +140,7 @@ public class AudioEventController {
                 .stream().map(AudioEventService::convertToDTO).collect(Collectors.toList()));
     }
 
-    @PostMapping("/api/audio-events/")
+    @RequestMapping(value = "/api/audio-events", method = RequestMethod.POST)
     private ResponseEntity<?> addAudioEvent(@RequestBody NewAudioEventDTO newAudioEventDTO) {
             audioEventService.saveAudioEvent(newAudioEventDTO);
             logger.info("AudioEvent was save");

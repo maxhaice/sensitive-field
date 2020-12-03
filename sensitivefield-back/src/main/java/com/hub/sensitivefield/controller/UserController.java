@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
