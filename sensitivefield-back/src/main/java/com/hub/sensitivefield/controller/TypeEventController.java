@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
 public class TypeEventController {
 
     private final TypeEventService typeEventService;
@@ -30,7 +30,7 @@ public class TypeEventController {
                 .collect(Collectors.toList()));
     }
 
-    @GetMapping("/api/types-events/{name}/")
+    @GetMapping("/api/types-events/{name}")
     public ResponseEntity<TypeEvent> getTypeEventByName(@PathVariable String name) {
         Optional<TypeEvent> typeEventOptional = typeEventService.getTypeEventByName(name);
         if (typeEventOptional.isEmpty()) {

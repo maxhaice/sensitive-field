@@ -11,16 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,7 +42,7 @@ public class AudioSensorController {
         this.situationWebSocketService = situationWebSocketService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     private ResponseEntity<?> getFilteredAudioSensors(@RequestParam(required = false) Integer page,
                                                                              @RequestParam(required = false) Integer pageSize,
                                                                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -102,7 +97,7 @@ public class AudioSensorController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     private ResponseEntity<Void> addAudioSensor(@RequestBody NewAudioSensorDTO newAudioSensorDTO) {
         try{
             audioSensorService.saveAudioSensor(newAudioSensorDTO);
