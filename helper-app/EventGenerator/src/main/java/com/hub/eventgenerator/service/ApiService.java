@@ -40,7 +40,7 @@ public class ApiService {
 
         logger.info("Generated event:\n" + audioEventJson);
         HttpResponse<?> response = httpService.post(API_BASE_URL + "/audio-events/", audioEventJson);
-        logger.debug("Response HTTP status code: [" + response.statusCode() + "].");
+        logger.debug("Response HTTP status code - " + response.statusCode() + ".");
     }
 
     public List<String> getAudioEventKinds() {

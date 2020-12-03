@@ -50,6 +50,11 @@ public class CommandLineApp implements Callable<Integer> {
             description = "Prettify JSON-objects output.")
     private boolean isPrettyJson;
 
+    @CommandLine.Option(
+            names = {"-e", "--existing"},
+            description = "Using only existing audio sensors for event generation.")
+    private boolean isUseExistingSensors;
+
     @Override
     public Integer call() {
         this.clear();
@@ -75,6 +80,13 @@ public class CommandLineApp implements Callable<Integer> {
         logger.debug("Entering application..");
         logger.debug("Building audio event generator..");
         EventGenerator.Builder eventGenBuilder = EventGenerator.builder();
+
+        if (isUseExistingSensors) {
+            logger.debug("Using ONLY existing audio sensors for event generation.");
+            eventGenBuilder.withExistingSensors();
+        }else {
+            logger.debug("Using audio sensors with random ID [0..100].");
+        }
 
         if (delay == 0) {
             if (delayBounds == null) {

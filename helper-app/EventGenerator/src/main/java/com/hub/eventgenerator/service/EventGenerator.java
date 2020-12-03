@@ -21,6 +21,7 @@ public class EventGenerator {
 
     private AtomicInteger delay;
     private boolean isRandomDelay;
+    private boolean isUseExistingSensors;
     private int randDelayLeftBound;
     private int randDelayRightBound;
 
@@ -40,7 +41,7 @@ public class EventGenerator {
         if (!isRandomDelay) {
             genTask = () -> {
                 logger.info("Generating audio event..");
-                apiService.sendAudioEvent(new RandomAudioEvent());
+                apiService.sendAudioEvent(new RandomAudioEvent(isUseExistingSensors));
             };
             scheduledExecutorService.scheduleWithFixedDelay(genTask, 0, delay.get(), TimeUnit.SECONDS);
         } else {
@@ -51,7 +52,7 @@ public class EventGenerator {
 
             genTask = () -> {
                 logger.info("Generating audio event..");
-                apiService.sendAudioEvent(new RandomAudioEvent());
+                apiService.sendAudioEvent(new RandomAudioEvent(isUseExistingSensors));
                 this.start();
             };
             scheduledExecutorService.schedule(genTask, delay.get(), TimeUnit.SECONDS);
@@ -80,6 +81,11 @@ public class EventGenerator {
             EventGenerator.this.randDelayLeftBound = min;
             EventGenerator.this.randDelayRightBound = max;
             EventGenerator.this.isRandomDelay = true;
+            return this;
+        }
+
+        public Builder withExistingSensors() {
+            EventGenerator.this.isUseExistingSensors = true;
             return this;
         }
 
