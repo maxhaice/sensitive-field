@@ -1,5 +1,5 @@
 <div>
-    <div style="width: 60%; margin-left: auto; margin-right: auto; text-align: center;" >
+    <div style="width: 60%; margin-left: auto; margin-right: auto; text-align: center; color: white !important;" >
     <strong>Налаштування профілю</strong><br><br>
       <mat-form-field appearance="fill">
         <mat-label>Поточний пароль</mat-label>
@@ -10,7 +10,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Новий пароль</mat-label>
-        <input [(ngModel)]="pass_1" matInput [type]="hide_2 ? 'password' : 'text'" (change)='passwordChange()' required>
+        <input [(ngModel)]="pass_1" matInput [type]="hide_2 ? 'password' : 'text'" required>
         <button mat-icon-button matSuffix (click)="hide_2 = !hide_2" [attr.aria-label]="'Сховати пароль'" [attr.aria-pressed]="hide_2">
         <mat-icon>{{hide_2 ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>

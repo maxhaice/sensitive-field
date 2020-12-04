@@ -1,12 +1,11 @@
 import {Component, ElementRef, HostBinding, OnInit, Sanitizer} from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { FireCommunication } from 'src/app/services/fire/firecomunication.service';
 
 @Component({
   selector: 'sound-set',
   templateUrl: 'sound-set.component.html',
   styleUrls: ['sound-set.component.css'],
-  providers: [FireCommunication]
+  // providers: [FireCommunication]
 })
 
 export class SoundSetComponent implements OnInit{
@@ -17,7 +16,7 @@ export class SoundSetComponent implements OnInit{
   anotherSounds: boolean;
   constructor( ) { }
   ngOnInit(): void {
-    this.isSoundAll = FireCommunication.isSoundAll();
+    // this.isSoundAll = FireCommunication.isSoundAll();
     if (this.isSoundAll){
       this.dangerSounds = this.isSoundAll;
       this.shootSounds = this.isSoundAll;
@@ -39,6 +38,6 @@ export class SoundSetComponent implements OnInit{
     this.shootSounds = this.isSoundAll;
     this.carSounds = this.isSoundAll;
     this.anotherSounds = this.isSoundAll;
-    FireCommunication.isSoundAll(all);
+    // FireCommunication.isSoundAll(all);
   }
 }

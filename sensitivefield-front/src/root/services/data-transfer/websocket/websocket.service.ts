@@ -8,24 +8,23 @@ import { TokenStorageService } from '../../local-storage/token.storage.service';
   providedIn: 'root'
 })
 export class WebSocketService {
-  private brokerURL = 'ws://localhost:8080/connect';
+  private brokerURL = 'ws://localhost:8080/connect/websocket';
 
   private rxStomp: RxStomp;
-  
-  constructor(private _ts: TokenStorageService){
-    if(this._ts.getToken()){
+
+  constructor(private tokenStorageService: TokenStorageService){
+    if (this.tokenStorageService.getToken()){
       this.rxStomp = new RxStomp();
       this.rxStomp.configure({
          brokerURL: this.brokerURL,
          connectHeaders: {
-         login: this._ts.getUsername(),
-         passcode: '//password'
+         login: '',
+         passcode: ''
          },
          heartbeatIncoming: 0,
          heartbeatOutgoing: 20000,
          reconnectDelay: 10000,
-         debug: ()=>{
-           //TODO: FireAlert
+         debug: () => {
          }
         });
       this.rxStomp.activate();

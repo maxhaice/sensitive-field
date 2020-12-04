@@ -59,7 +59,9 @@ public class AudioSensorController {
         if(page==null && pageSize==null){
             return ResponseEntity.ok(audioSensorService.getAllAudioSensorEntity());
         }
-
+        if(pageSize == null){
+            pageSize = 10;
+        }
         Page<AudioSensor> audioSensors = audioSensorService
                 .getFilteredSortedPageableAudioSensors(dateAfter, dateBefore
                                         ,name, sortBy, isDescending, page, pageSize);

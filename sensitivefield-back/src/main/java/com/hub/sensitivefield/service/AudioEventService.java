@@ -39,13 +39,16 @@ public class AudioEventService {
 
     final private TypeEventService typeEventService;
 
+    final private AudioSensorService audioSensorService;
+
     @Autowired
-    public AudioEventService(AudioEventRepository audioEventRepository, AudioSensorRepository audioSensorRepository, SituationWebSocketService situationWebSocketService, KindEventService kindEventService, TypeEventService typeEventService) {
+    public AudioEventService(AudioSensorService audioSensorService, AudioEventRepository audioEventRepository, AudioSensorRepository audioSensorRepository, SituationWebSocketService situationWebSocketService, KindEventService kindEventService, TypeEventService typeEventService) {
         this.audioEventRepository = audioEventRepository;
         this.audioSensorRepository = audioSensorRepository;
         this.situationWebSocketService = situationWebSocketService;
         this.kindEventService = kindEventService;
         this.typeEventService = typeEventService;
+        this.audioSensorService = audioSensorService;
     }
 
     public Optional<AudioEvent> getAudioEventById(int id) {
@@ -68,11 +71,13 @@ public class AudioEventService {
             Longitude longitude = new Longitude(newAudioEventDTO.getSensorCoordinates()
                     .get("lon").asDouble());
             ID id = new ID(newAudioEventDTO.getSensorId());
-            audioSensorRepository.save(new AudioSensor(
+            AudioSensor newAudioSensorForSave = new AudioSensor(
                     id,
                     latitude,
                     longitude,
-                    LocalDateTime.now()));
+                    LocalDateTime.now());
+            audioSensorRepository.save(newAudioSensorForSave);
+            situationWebSocketService.sendNewSensor(audioSensorService.convertToDTO(newAudioSensorForSave));
         }
         AudioEvent audioEvent = convertFromDTO(newAudioEventDTO);
         audioEventRepository.save(audioEvent);
@@ -98,7 +103,7 @@ public class AudioEventService {
         AudioSensor audioSensor = audioSensorRepository.findById(newAudioEventDTO.getSensorId()).get();
 
         LocalDateTime date_real = newAudioEventDTO.getDateReal();
-        LocalDateTime dateServer = LocalDateTime.now();
+        LocalDateTime dateServer = LocalDateTime.now().plusHours(2);;
 
         double latitudeSource = newAudioEventDTO.getCoordinate()
                 .get("lat").asDouble();

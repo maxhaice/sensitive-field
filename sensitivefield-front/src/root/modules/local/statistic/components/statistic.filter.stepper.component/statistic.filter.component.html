@@ -1,0 +1,60 @@
+<mat-horizontal-stepper linear labelPosition="bottom" #stepper>
+    <ng-template matStepperIcon="edit">
+        <mat-icon>done</mat-icon>
+      </ng-template>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <button mat-icon-button matStepperPrevious>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+          <mat-radio-group formControlName="opt1" aria-label="Select by:">
+              <label>Select by:</label><br>
+              <mat-radio-button value="sensors">Audio Sensors</mat-radio-button><br><br>
+              <mat-radio-button value="events">Audio Events</mat-radio-button><br><br>
+          </mat-radio-group>
+            <button mat-icon-button matStepperNext>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <button mat-icon-button matStepperPrevious>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+          <mat-radio-group formControlName="opt2" aria-label="Select by:">
+              <label>Select by:</label><br>
+              <mat-radio-button value="kind">Kind</mat-radio-button><br><br>
+              <mat-radio-button value="type">Type</mat-radio-button><br><br>
+              <mat-radio-button value="danger">Danger</mat-radio-button><br>
+          </mat-radio-group>
+            <button mat-icon-button matStepperNext>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="timeFormGroup">
+        <form [formGroup]="timeFormGroup">
+            <button mat-icon-button matStepperPrevious>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <div class="datepickers">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Choose a start date:</mat-label>
+                    <input matInput formControlName="opt3"   [matDatepickerFilter]="timeFilterStart" [matDatepicker]="start" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+                    <mat-datepicker  #start disabled="false"></mat-datepicker>
+                  </mat-form-field><br>
+                  <mat-form-field  appearance="fill">
+                    <mat-label>Choose a end date:</mat-label>
+                    <input matInput  formControlName="opt4"  [matDatepickerFilter]="timeFilterEnd" [matDatepicker]="end" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker #end disabled="false"></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <button mat-icon-button (click)="saveOptions()">
+                <mat-icon>done</mat-icon>
+            </button>
+        </form>
+      </mat-step>
+  </mat-horizontal-stepper>

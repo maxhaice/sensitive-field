@@ -1,0 +1,83 @@
+.container {
+  position: relative;
+  min-height: 200px;
+  height: 100%;
+}
+.table-container {
+  position: relative;
+
+  height: 90.99%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background-color: lightgray;
+}
+table {
+  width: 100%;
+}
+.mat-header-cell {
+  color: lightgray;
+  background-color: rgb(23, 23, 23);
+}
+.mat-sort-header-arrow {
+  color: lightgray;
+}
+.mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+  color: lightgray;
+  background-color: rgb(23, 23, 23);
+}
+button {
+  width: 60px !important;
+  height: 60px !important;
+  margin-left: -10px;
+  margin-right: auto;
+  color: rgb(23, 23, 23) !important;
+  transition: 300ms;
+}
+.mat-icon {
+  position: relative;
+  top: 13px;
+  height: 50px !important;
+  width: 50px !important;
+  font-size: 50px !important;
+  transition: 400ms;
+}
+.mat-tab-body-wrapper {
+  height: calc(100vh - 28px);
+}
+
+.mat-tab-body.mat-tab-body-active {
+  height: calc(100vh - 28px);
+}
+.mat-tab-label,
+.mat-tab-label-active {
+  height: 27px !important;
+  min-height: 5px !important;
+  margin: 0px !important;
+  width: 90px !important;
+  min-width: 50% !important;
+}
+.mat-tab-label .mat-icon {
+  position: relative;
+  top: -0px;
+  right: 5px;
+  height: 20px !important;
+  width: 20px !important;
+  font-size: 20px !important;
+  transition: 400ms;
+}
+.mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  color: white;
+  font-weight: bold;
+  background-color: rgb(23, 23, 23);
+}
+.mat-ink-bar {
+  background-color: white !important;
+}
+.mat-tab-label {
+  color: white;
+  font-weight: bold;
+  background-color: rgb(23, 23, 23);
+}

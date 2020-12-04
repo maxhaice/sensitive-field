@@ -1,0 +1,59 @@
+<div class="center">
+    <div class="container">
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="openOptions" (opened)="openOptions=true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <label style="font-weight: bold;">Options</label>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <stat-filter (options)="setOptions($event)"></stat-filter>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-tab-group [color]="'darkgrey'" mat-align-tabs="center" dynamicHeight>
+          <mat-tab label="LineChart">              
+            <mat-card class="diagram">
+              <canvas baseChart
+              [datasets]="full" 
+              [labels]="labels" 
+              [options]="cartOptipions"
+              [colors]="chartColors" 
+              [legend]="isLegends" 
+              [chartType]="lineChartType">
+              </canvas>
+            </mat-card>
+          </mat-tab>
+          <mat-tab label="BarChart">
+            <mat-card class="diagram">
+              <canvas baseChart
+            [datasets]="full"
+            [labels]="labels" 
+            [legend]="isLegends" 
+            [options]="cartOptipions"
+            [chartType]="barChartType">
+              </canvas>
+              </mat-card>
+          </mat-tab>
+          <mat-tab label="DoughnutChart">
+            <mat-card class="diagram">
+              <canvas baseChart
+              [data]="doughnutFull"
+              [labels]="labels" 
+              [legend]="isLegends" 
+              [chartType]="doughnutChartType">
+              </canvas>
+              </mat-card>
+          </mat-tab> 
+          <mat-tab label="RadarChart">
+            <mat-card class="diagram">
+              <canvas baseChart 
+                [datasets]="full"
+                [labels]="labels" 
+                [legend]="isLegends" 
+                [options]="cartOptipions"
+                [chartType]="radarChartType"></canvas>
+              </mat-card>
+          </mat-tab>        
+        </mat-tab-group>
+    </div>
+</div>

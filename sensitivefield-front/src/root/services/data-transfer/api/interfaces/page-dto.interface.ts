@@ -1,5 +1,5 @@
 export interface PageDTO<T>{
-    data: T,
+    audioSensors: T;
     meta: {
         page: number,
         per_page: number,
@@ -8,5 +8,5 @@ export interface PageDTO<T>{
         order_by: string,
         order_direction: string,
         search: string
-    }
+    };
 }

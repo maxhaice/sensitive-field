@@ -1,0 +1,41 @@
+<div class="center">
+    <div class="title">
+       <strong>Settings</strong>
+    </div>
+    <div class="container">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p>Profile</p>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+         <profile></profile>
+        </mat-expansion-panel>
+        <!-- <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p> Дизайн</p>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <design-set></design-set>
+        </mat-expansion-panel> -->
+        <mat-expansion-panel *ngIf="authority!='ROLE_USER'">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p>Users</p>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <register ></register>
+        </mat-expansion-panel>
+        <!-- <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p>Alert</p>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <sound-set></sound-set>
+        </mat-expansion-panel> -->
+      </mat-accordion>
+    </div>
+</div>
