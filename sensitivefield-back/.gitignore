@@ -16,7 +16,8 @@ db-data/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/libraries/
+.idea/*.*
 *.iws
 *.iml
 *.ipr
