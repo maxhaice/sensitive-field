@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="run" type="JarApplication">
     <option name="JAR_PATH" value="$PROJECT_DIR$/target/EventGenerator-1.0.jar" />
-    <option name="WORKING_DIRECTORY" value="D:\projects\java\sensitive-field\helper-app\EventGenerator" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="ALTERNATIVE_JRE_PATH" value="openjdk-15" />
     <method v="2" />
