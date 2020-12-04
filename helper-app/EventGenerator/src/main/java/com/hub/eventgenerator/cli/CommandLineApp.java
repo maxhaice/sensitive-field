@@ -1,6 +1,7 @@
 package com.hub.eventgenerator.cli;
 
 import com.hub.eventgenerator.service.ApiService;
+import com.hub.eventgenerator.service.DataRandomizer;
 import com.hub.eventgenerator.service.EventGenerator;
 import com.hub.eventgenerator.utility.AudioEventSerializer;
 import org.apache.logging.log4j.Level;
@@ -85,7 +86,7 @@ public class CommandLineApp implements Callable<Integer> {
             logger.debug("Using ONLY existing audio sensors for event generation.");
             eventGenBuilder.withExistingSensors();
         }else {
-            logger.debug("Using audio sensors with random ID [0..100].");
+            logger.debug("Using audio sensors with random ID [0..." + DataRandomizer.MAX_SENSOR_ID + "].");
         }
 
         if (delay == 0) {
