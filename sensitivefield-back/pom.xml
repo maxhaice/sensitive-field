@@ -13,7 +13,7 @@
     <artifactId>sensitivefield</artifactId>
     <version>0.0.1-beta</version>
     <name>sensitivefield</name>
-    <description>Backend for SensitiveField project.</description>
+    <description>Backend for SensitiveField project</description>
 
     <properties>
         <java.version>15</java.version>
@@ -54,11 +54,6 @@
             <version>3.0.0</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-oauth2-client</artifactId>-->
-        <!--        </dependency>-->
-
         <!-- SECURITY -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,11 +82,6 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.session</groupId>-->
-        <!--            <artifactId>spring-session-core</artifactId>-->
-        <!--        </dependency>-->
 
         <dependency>
             <groupId>mysql</groupId>
