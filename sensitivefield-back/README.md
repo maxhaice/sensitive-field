@@ -92,6 +92,17 @@ To open it you should:
     * Run application
     * Navigate to `localhost:8080/swagger-ui/` in browser
 
+### Postman
+Also, you can use [Postman](https://www.postman.com/downloads/) for your purpose.
+Collection of HTTP-requests stores in [postman_collection.json](./postman_collection.json).
+To import:
+* Run Postman application
+* `Import` --> `Upload Files`.
+* Select *postman_collection.json*.
+
+If you new in Postman, you can follow this [guide](https://learning.postman.com/docs/sending-requests/requests/).
+ 
+  
 ## Info about the project
 
 ### Users rights
