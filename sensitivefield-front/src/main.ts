@@ -7,6 +7,5 @@ import { RootModule } from './root/root.module';
 if (environment.production) {
   enableProdMode();
 }
-
 platformBrowserDynamic().bootstrapModule( RootModule )
   .catch(err => console.error(err));

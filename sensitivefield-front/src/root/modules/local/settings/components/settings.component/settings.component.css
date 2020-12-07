@@ -1,0 +1,137 @@
+.center{
+    width: 100%; height: 100%;
+  }
+  .title{
+    background-color: var(--secondary-color);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 32px;
+    width: 100%; height: 10%;
+    box-shadow: 0px 1px 4px var(--text-color);
+  }
+  .title>strong{
+    margin-right: auto; margin-left: auto;
+  }
+  .container{
+    z-index: 5;
+    height: 90%;
+    overflow: auto;
+  }
+  .container::-webkit-scrollbar{
+    width: 0;
+  }
+  .element{
+    height: 20%;
+    list-style: none;
+    text-align: center;
+    margin-top: 4px;
+    z-index: 1;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.201);
+  }
+  register, audio-set{
+    width: 45%;
+    height: 100%;
+  }
+  input{
+    width: 100%;
+  }
+  mat-accordion{
+    margin-top: 5px;
+  
+  }
+  mat-expansion-panel{
+    background-color: var(--background-color);
+  }
+  p{
+    color: var(--text-color);
+    text-align: left;
+  }
+
+
+  .center {
+    width: 99.99%;
+    height: 100%;
+    color: darkgrey !important;
+    overflow: hidden;
+    background-color: rgb(23, 23, 23);
+  }
+  .center::-webkit-scrollbar {
+    width: 0px;
+  }
+  .container {
+    overflow: auto;
+  }
+  .container::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  .diagram {
+    margin: 14px 14px 14px 14px;
+    height: 70.5%;
+  }
+  canvas {
+    margin: 7px 5px;
+    width: 99% !important;
+    height: 98% !important;
+  }
+  select {
+    width: 100%;
+    background: rgb(24, 24, 24);
+    border: none;
+    box-shadow: 0px 0px 2px black;
+  }
+  mat-expansion-panel {
+    background-color: rgb(24, 24, 24) !important;
+    margin-left: -3px;
+  }
+  .mat-expansion-panel-header-title {
+    color: darkgrey !important;
+  }
+  
+  mat-card {
+    background-color: darkgrey;
+  }
+  .mat-tab-group.mat-primary {
+    height: auto;
+  }
+  
+  .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    color: darkgrey;
+    font-weight: bold;
+  }
+  .mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    color: darkgrey;
+    background-color: darkgrey;
+  }
+  .mat-tab-label,
+  .mat-tab-label-active {
+    height: 6vh !important;
+    min-height: auto !important;
+    margin: auto !important;
+    width: auto !important;
+    min-width: auto !important;
+  }
+  .mat-ink-bar {
+    background-color: lightgray !important;
+  }
+  .mat-tab-label {
+    color: lightgray;
+  }
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: black !important;
+  }
+  .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: black !important;
+  }
+  .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: black !important;
+  }
+  .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+    color: lightgray !important;
+  }
+  .mat-horizontal-stepper-header::before, .mat-horizontal-stepper-header::after, .mat-stepper-horizontal-line {
+    border-top-color: black !important;
+  }

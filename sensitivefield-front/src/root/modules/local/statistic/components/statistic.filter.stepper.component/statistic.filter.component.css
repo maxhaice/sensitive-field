@@ -1,0 +1,35 @@
+.mat-stepper-horizontal, .mat-stepper-vertical {
+    border-radius: 4px;
+    margin: 14px 14px 14px 14px;
+    background-color: darkgrey;
+    color: black;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: white;
+    color: black;
+}
+form{
+    margin-top: 7.5vh;
+    height: calc(42.5vh - 56.5px);
+    display: grid;
+        grid-template-rows: 100%;
+        grid-template-columns: auto auto auto;
+}
+mat-radio-group{
+    margin-left: auto; margin-right: auto;
+}
+button{
+    margin-top: 6vh;
+    margin-left: auto; margin-right: auto;
+}
+label{
+    font-weight: bold;
+    margin-left: -2px;
+}
+.datepickers{
+    margin-left: auto; margin-right: auto;
+}
+label{
+    position: relative;
+    top: -1vh;
+}

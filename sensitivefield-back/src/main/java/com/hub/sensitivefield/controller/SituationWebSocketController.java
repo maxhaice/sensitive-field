@@ -24,9 +24,19 @@ public class SituationWebSocketController {
     }
 
     @MessageMapping("/get-last-events")
-    private void getLastEvents(@Header("simpSessionId") String sesionId, Integer count) {
+    private void getLastEvents(@Header("simpSessionId") String sesionId) {
+        logger.info("last events was send by socket to session with id=" + sesionId);
+    }
+
+    @MessageMapping("/new-event")
+    private void getEvent(@Header("simpSessionId") String sesionId, Integer count) {
         logger.info("last events was send by socket to session with id=" + sesionId);
         situationWebSocketService.getLastEvents(sesionId, count);
+    }
+
+    @MessageMapping("/new-sensor")
+    private void getSensor(@Header("simpSessionId") String sesionId, Integer count) {
+        logger.info("last events was send by socket to session with id=" + sesionId);
     }
 
     @MessageMapping("/get-sensors")

@@ -2,6 +2,7 @@ package com.hub.sensitivefield.service;
 
 
 import com.hub.sensitivefield.dto.AudioEventDTO;
+import com.hub.sensitivefield.dto.AudioSensorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,9 @@ public class SituationWebSocketService {
     public void getSensors(String session_id) {
         simpMessagingTemplate.convertAndSend("/topic/get-sensors"
                 + session_id, audioSensorService.getAllAudioSensors());
+    }
+
+    public void sendNewSensor(AudioSensorDTO audioSensorDTO) {
+        simpMessagingTemplate.convertAndSend("/topic/new-sensor", audioSensorDTO);
     }
 }

@@ -4,7 +4,7 @@
   height: 100%;
   overflow: hidden;
   display: grid;
-  grid-auto-flow: row;
+  grid-template-rows: 50% 50%;
 }
 .cont{
   margin: 4px 4px 4px 4px;
@@ -37,7 +37,7 @@
   cursor: pointer;
 
   margin: 10px 8px 10px 8px;
-  height: 50px;
+  height: 70px;
 
   border-radius: 4px;
 

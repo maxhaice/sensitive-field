@@ -7,10 +7,11 @@ import { SharingModule } from './modules/environment/sharing.module';
 import { RootComponent } from './modules/root/root.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './modules/root/navbar/navbar.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
-    declarations: [RootComponent,NavbarComponent],
-    imports: [ BrowserModule, CoreModule, SharingModule, RoutingModule, BrowserAnimationsModule ],
+    declarations: [RootComponent, NavbarComponent],
+    imports: [ BrowserModule, CommonModule, CoreModule, SharingModule, RoutingModule, BrowserAnimationsModule ],
     bootstrap: [RootComponent]
 })
 export class RootModule {}

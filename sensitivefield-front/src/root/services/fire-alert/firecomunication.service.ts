@@ -8,7 +8,7 @@ export class FireCommunication {
   constructor() { }
   static async onInit(): Promise<void> {
     const userSet = new LocalStorage();
-    await userSet.ngOnInit();
+    await userSet.onInit();
     FireCommunication.navbar.next(await userSet.getUser().left_navbar);
     FireCommunication.soundAll = await userSet.getUser().sound_all;
     document.documentElement.style.setProperty('--primary-color', await userSet.getUser().s_text);

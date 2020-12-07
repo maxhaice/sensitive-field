@@ -16,8 +16,8 @@ export class TokenStorageService {
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
   public getToken(): string {
-    return 'lol';
-    return sessionStorage.getItem(TOKEN_KEY);
+    return 'sample_token';
+    // return sessionStorage.getItem(TOKEN_KEY);
   }
   public saveUsername(username: string): void {
     window.sessionStorage.removeItem(USERNAME_KEY);
@@ -31,13 +31,13 @@ export class TokenStorageService {
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
   public getAuthorities(): string[] {
-    return ["ROLE_ADMIN"];
-    this.roles = [];
-    if (sessionStorage.getItem(TOKEN_KEY)) {
-      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
-        this.roles.push(authority.authority);
-      });
-    }
-    return this.roles;
+    return ['ROLE_ADMIN'];
+    // this.roles = [];
+    // if (sessionStorage.getItem(TOKEN_KEY)) {
+    //   JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
+    //     this.roles.push(authority.authority);
+    //   });
+    // }
+    // return this.roles;
   }
 }

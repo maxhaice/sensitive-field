@@ -1,0 +1,47 @@
+<br /><br />
+<div class="history-grid">
+  <map
+    [sensors]="audioSensors"
+    [event]="audioEvents"
+    [center]="center"
+    [live]="false"
+    id="map"
+    class="map"
+  >
+  </map>
+  <div class="bottom">
+    <button
+      (click)="toBack()"
+      mat-icon-button
+      color="warn"
+      style="margin-right: auto; margin-left: 15px"
+      aria-label="Example icon button with a heart icon"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <div style="text-align: center; height: 40px; width: 100%">
+      <label style="font-size: 10px; color: white; font-weight: bold">{{
+        dateTimeService.date(day,month)
+      }}</label>
+      <mat-slider
+        style="width: 100%; margin-top: -19px"
+        thumbLabel
+        [displayWith]="dateTimeService.formatLabel"
+        tickInterval="1000"
+        [value]="value"
+        [min]="min"
+        [max]="maxNumb"
+      ></mat-slider>
+    </div>
+    <button
+      (click)="toForward()"
+      [disabled]="day === this.dateTimeService.today().getDate() && this.dateTimeService.today().getMonth() === month"
+      mat-icon-button
+      color="warn"
+      style="margin-left: auto; margin-right: 15px"
+      aria-label="Example icon button with a heart icon"
+    >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</div>

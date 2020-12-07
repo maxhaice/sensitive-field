@@ -1,3 +1,3 @@
 export interface DTO<T>{
-    values: T[]
+    values: T[];
 }

@@ -1,17 +1,17 @@
 .vertical-bar{
     position: absolute;
 
-    right: 0%;
+    right: 0;
 
     width: 20.5%;
     height: 100%;
 
-    color: white;
+    color: darkgrey;
     text-align: center;
     font-family: fantasy;
 
     background-color: rgb(23, 23, 23);
-    box-shadow: -2px 0px 2px black;
+    box-shadow: -2px 0 2px black;
 }
 .vertical-bar > strong{
     font-size: 40px;
@@ -24,4 +24,5 @@
     height:128px !important;
     width:128px !important;
     font-size:128px !important;
+    color: darkgrey !important;
 }

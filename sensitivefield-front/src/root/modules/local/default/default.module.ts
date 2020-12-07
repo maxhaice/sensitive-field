@@ -7,4 +7,4 @@ import { DefaultComponent } from './components/default.component/default.compone
     imports: [MaterialModule],
     exports: [DefaultComponent]
 })
-export class DefaultModule {}   
+export class DefaultModule {}

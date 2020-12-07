@@ -19,5 +19,6 @@ public class SituationWebSocketConfig implements WebSocketMessageBrokerConfigure
     @Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
         stompEndpointRegistry.addEndpoint("/connect").setAllowedOrigins("*").withSockJS();
+        System.out.println("CONNECTED");
     }
 }
