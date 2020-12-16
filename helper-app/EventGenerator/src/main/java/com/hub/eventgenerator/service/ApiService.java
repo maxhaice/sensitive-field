@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hub.eventgenerator.model.AudioEvent;
+import com.hub.eventgenerator.model.AudioSensor;
+import com.hub.eventgenerator.model.Coordinates;
 import com.hub.eventgenerator.utility.AudioEventSerializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,22 +62,26 @@ public class ApiService {
         return result;
     }
 
-    public List<Integer> getAvailableAudioSensors() {
-        List<Integer> result = new ArrayList<>();
+    public List<AudioSensor> getAvailableAudioSensors() {
+        List<AudioSensor> sensors = new ArrayList<>();
 
         String json = httpService.get(API_BASE_URL + "/audio-sensors/").body().toString();
         try {
             JsonNode node = objectMapper.readTree(json);
             for (JsonNode subNode : node) {
-                result.add(subNode.get("id").intValue());
+                int id = subNode.get("id").asInt();
+                double lat = subNode.get("latitude").asDouble();
+                double lon = subNode.get("longitude").asDouble();
+
+                sensors.add(new AudioSensor(id, new Coordinates(lat, lon)));
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        logger.debug("List of available sensors: [" + result.stream()
-                .map(String::valueOf)
+        logger.debug("List of available sensors: [" + sensors.stream()
+                .map((s) -> String.valueOf(s.getId()))
                 .collect(Collectors.joining(", ")) + "].");
-        return result;
+        return sensors;
     }
 
     public boolean isBackendRun() {

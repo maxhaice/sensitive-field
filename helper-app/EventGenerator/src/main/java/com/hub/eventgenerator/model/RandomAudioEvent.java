@@ -10,13 +10,18 @@ public class RandomAudioEvent extends AudioEvent {
     public RandomAudioEvent(boolean isExistingSensor) {
         super();
         DataRandomizer randomizer = new DataRandomizer();
-        Coordinates sensorCoordinates = randomizer.getRandomSensorCoordinates();
+
+        AudioSensor sensor;
+        Source source;
         if (isExistingSensor) {
-            super.setSensorId(randomizer.getRandomExistingSensorId());
+            sensor = randomizer.getExistingSensor(true);
         } else {
-            super.setSensorId(randomizer.getRandomSensorId(100));
+            sensor = randomizer.getRandomSensor();
         }
-        super.setSensorCoordinates(sensorCoordinates);
-        super.setSource(randomizer.getRandomSource(sensorCoordinates));
+        source = randomizer.getRandomSource(sensor.getCoordinates());
+
+        super.setSensorId(sensor.getId());
+        super.setSensorCoordinates(sensor.getCoordinates());
+        super.setSource(source);
     }
 }
